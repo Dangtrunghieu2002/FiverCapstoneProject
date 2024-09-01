@@ -5,6 +5,7 @@ import Solution from '../../components/IndexComponent/Solution'
 import Video from '../../components/IndexComponent/Video'
 import LogoMaker from '../../components/IndexComponent/LogoMaker'
 import Guide from '../../components/IndexComponent/Guide'
+import LastBanner from '../../components/IndexComponent/LastBanner'
 const IndexPage = () => {
   return (
     <>
@@ -14,6 +15,7 @@ const IndexPage = () => {
         <Video />
         <LogoMaker />
         <Guide />
+        <LastBanner/>
     </>
   )
 }

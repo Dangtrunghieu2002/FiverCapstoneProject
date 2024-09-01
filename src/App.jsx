@@ -3,6 +3,7 @@ import { ToastContainer, toast,Bounce } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import React, { useEffect } from "react";
+import Carousel from "./components/carousel/Carousel";
 
 export const NotificationContext = React.createContext();
 
@@ -29,6 +30,7 @@ function App() {
         <ToastContainer />
         {routes}
       </NotificationContext.Provider>
+      {/* <Carousel /> */}
     </>
   );
 }

@@ -2,15 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.hover-green{
-    @apply hover:text-green-500 duration-300
+* {
+  box-sizing: border-box;
+}
+.hover-green {
+  @apply hover:text-green-500 duration-300;
 }
 
-.button{
-    @apply py-2 px-5 border rounded-md bg-blue-500
+.button {
+  @apply py-2 px-5 border rounded-md bg-blue-500;
 }
 
-.box-shadow{
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+.box-shadow {
+  box-shadow: 0 0 0.880517px rgba(0, 0, 0, 0.029),
+    0 0 2.29197px rgba(0, 0, 0, 0.03), 0 0 5.52px rgba(0, 0, 0, 0.054),
+    0 0 11px rgba(0, 0, 0, 0.09);
+}
+
+.bg {
+  &:hover {
+    background: radial-gradient(
+      circle at 50% 50%,
+      /* Vị trí và kiểu gradient hình tròn */ #c2ffe2 0%,
+      /* Màu xanh nhạt ở điểm bắt đầu */ #fff 100%
+        /* Màu trắng ở điểm kết thúc */
+    );
+  }
+}
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+footer {
+  ul {
+    li {
+      margin-bottom: 20px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
