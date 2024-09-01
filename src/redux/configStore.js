@@ -1,7 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from "@reduxjs/toolkit";
+import authSlice from "./authSlice";
+import nguoiDungSlice from "./nguoiDungSlice";
+import skillSlice from "./skillSlice";
 
 export const store = configureStore({
-  reducer: {},
-})
-
-export default store;
+  reducer: {
+    authSlice,
+    nguoiDungSlice,
+    skillSlice,
+  },
+});
