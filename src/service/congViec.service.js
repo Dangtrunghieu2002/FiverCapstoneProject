@@ -9,5 +9,8 @@ export const congViecService = {
     },
     layCongViecTheoMaChiTietLoai: (data) => {
         return http.get(`/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${data}`)
+    },
+    layCongViecTheoMaLoaiCongViec: (data) => {
+        return http.get(`/cong-viec/lay-chi-tiet-loai-cong-viec/${data}`)
     }
 }

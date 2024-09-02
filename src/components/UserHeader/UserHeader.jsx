@@ -33,7 +33,7 @@ const items = [
 ];
 
 const UserHeader = () => {
-  const { inforUser } = useSelector((state) => state.authSlice) 
+  const { inforUser } = useSelector((state) => state.authSlice);
   const checkUserLogin = () => {
     return inforUser ? (
       <Dropdown
@@ -64,7 +64,7 @@ const UserHeader = () => {
     );
   };
   return (
-    <header className="px-5 py-4 xl:px-0 border-b sticky">
+    <header className="px-5 py-4 xl:px-0 border-b sticky ">
       <div className="container">
         <div className="header_content flex items-center justify-between space-x-5 min-w-full">
           <div className="header_logo flex items-center gap-8">

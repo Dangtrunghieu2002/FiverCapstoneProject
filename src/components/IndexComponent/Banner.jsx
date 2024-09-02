@@ -2,6 +2,8 @@ import React from "react";
 import FormSearchProduct from "../Form/FormSearchProduct";
 import WrapperSuggestJob from "../Wrapper/WrapperSuggestJob";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { path } from "../../common/path";
 
 const Banner = () => {
   const { listJobApi } = useSelector((state) => state.congViecSlice);
@@ -140,7 +142,7 @@ const Banner = () => {
           {listJobApi?.map((item, index) => {
             return (
               <div className="flex justify-center items-center text-center p-5 h-[129px] w-[129px] box-shadow rounded-3xl bg">
-                <h3 className="text-sm font-semibold">{item.tenLoaiCongViec}</h3>
+                <Link to={`${path.jobType}?MaLoaiCongViec=${item.id}`} className="text-sm font-semibold">{item.tenLoaiCongViec}</Link>
               </div>
             );
           })}

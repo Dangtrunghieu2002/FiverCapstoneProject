@@ -6,12 +6,18 @@ import { congViecService } from "../../service/congViec.service";
 import { useSelector } from "react-redux";
 import { path } from "../../common/path";
 import UserNav from "../../components/userNav/userNav";
+import { useLocation } from "react-router-dom";
 
 const ListJobPage = () => {
   const [seachParam, setSearchParam] = useSearchParams();
   const [listJob, setListJob] = useState([]);
   const getRandomNumber = (min, max) =>
     Math.floor(Math.random() * (max - min + 1)) + min;
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   if (seachParam.get("tenCongViec")) {
     useEffect(() => {
       let tenCongViec = seachParam.get("tenCongViec");
@@ -172,27 +178,63 @@ const ListJobPage = () => {
         <div className="grid grid-cols-4 gap-7 mt-3">
           {listJob?.map((item, index) => {
             return (
-              <div className="rounded-md">
+              <div className="">
                 <img
                   src={item.congViec.hinhAnh}
-                  className="w-full rounded-xl"
+                  className="w-full max-h-[240px] object-cover rounded-xl"
                   alt=""
                 />
                 <div className="py-4 flex flex-col justify-between">
-                  <div className="flex items-center space-x-3 mb-2">
-                    <img
-                      src={item.avatar}
-                      alt=""
-                      className="w-7 h-7 rounded-full"
-                    />
-                    <h4 className="font-bold text-lg">{item.tenNguoiTao}</h4>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center space-x-3 mb-2">
+                      <img
+                        src={item.avatar}
+                        alt=""
+                        className="w-7 h-7 rounded-full"
+                      />
+                      <h4 className="font-bold text-lg">{item.tenNguoiTao}</h4>
+                    </div>
+                    <div className="flex items-center gap-1 px-2 rounded-md bg-[#FFE0B3]">
+                      <h3 className="text-sm font-bold">Top Rated</h3>
+                      <div className="flex">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 10 10"
+                          width="10"
+                          height="10"
+                          fill="currentColor"
+                        >
+                          <path d="M4.839.22a.2.2 0 0 1 .322 0l1.942 2.636a.2.2 0 0 0 .043.043L9.782 4.84a.2.2 0 0 1 0 .322L7.146 7.105a.2.2 0 0 0-.043.043L5.161 9.784a.2.2 0 0 1-.322 0L2.897 7.148a.2.2 0 0 0-.043-.043L.218 5.163a.2.2 0 0 1 0-.322l2.636-1.942a.2.2 0 0 0 .043-.043L4.839.221Z"></path>
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 10 10"
+                          width="10"
+                          height="10"
+                          fill="currentColor"
+                        >
+                          <path d="M4.839.22a.2.2 0 0 1 .322 0l1.942 2.636a.2.2 0 0 0 .043.043L9.782 4.84a.2.2 0 0 1 0 .322L7.146 7.105a.2.2 0 0 0-.043.043L5.161 9.784a.2.2 0 0 1-.322 0L2.897 7.148a.2.2 0 0 0-.043-.043L.218 5.163a.2.2 0 0 1 0-.322l2.636-1.942a.2.2 0 0 0 .043-.043L4.839.221Z"></path>
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 10 10"
+                          width="10"
+                          height="10"
+                          fill="currentColor"
+                        >
+                          <path d="M4.839.22a.2.2 0 0 1 .322 0l1.942 2.636a.2.2 0 0 0 .043.043L9.782 4.84a.2.2 0 0 1 0 .322L7.146 7.105a.2.2 0 0 0-.043.043L5.161 9.784a.2.2 0 0 1-.322 0L2.897 7.148a.2.2 0 0 0-.043-.043L.218 5.163a.2.2 0 0 1 0-.322l2.636-1.942a.2.2 0 0 0 .043-.043L4.839.221Z"></path>
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <h3>{item.congViec.tenCongViec}</h3>
                     <p>
                       <span className="space-x-1">
                         <i class="fa-solid fa-star"></i>
-                        <span className="font-bold">{item.congViec.saoCongViec} </span>
+                        <span className="font-bold">
+                          {item.congViec.saoCongViec}{" "}
+                        </span>
                       </span>
                       <span className="text-gray-400">
                         ({item.congViec.danhGia})
