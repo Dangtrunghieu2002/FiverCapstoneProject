@@ -1,10 +1,13 @@
-
+// App.js
+import React from 'react';
+import QuanLyNguoiDung from './pages/QuanLyNguoiDung.jsx';
 
 function App() {
-
   return (
-    <div className="text-red-500">Day la template ReactJs phien ban 18</div>
-  )
+    <div className="App">
+      <QuanLyNguoiDung />
+    </div>
+  );
 }
 
-export default App
+export default App;
