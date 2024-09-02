@@ -2,8 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Macan';
+  src: url('../public/font/macan-regular.woff2');
+}
+
+@font-face {
+  font-family: 'Domaine';
+  src: url('../public/font/domaine-display-web-medium-italic.woff2');
+}
+
 * {
+  font-family: 'Macan',sans-serif;
   box-sizing: border-box;
+}
+
+.font{
+  font-family: 'Domaine', sans-serif;
 }
 .hover-green {
   @apply hover:text-green-500 duration-300;

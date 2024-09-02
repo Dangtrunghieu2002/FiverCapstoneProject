@@ -2,7 +2,7 @@ import React from 'react'
 
 const Guide = () => {
   return (
-    <div className='container py-10 px-5 sm:px-3'>
+    <div className='container py-10 px-5 sm:px-3 lg:px-0'>
         <h3 className='text-5xl font-normal mb-10'>Guides to help you grow</h3>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
             <div className=''>

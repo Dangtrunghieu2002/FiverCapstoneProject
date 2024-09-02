@@ -2,7 +2,7 @@ import React from "react";
 
 const LogoMaker = () => {
   return (
-    <div className="container py-10 px-5 sm:px-3">
+    <div className="container py-10 px-5 sm:px-3 lg:px-0">
       <div className="w-full bg-[#FFF6F2] rounded-3xl py-8 px-6 md:p-10 lg:py-[50px] lg:px-[70px] flex justify-between items-center">
         <div className="flex flex-col gap-10 w-[35%]">
           <svg

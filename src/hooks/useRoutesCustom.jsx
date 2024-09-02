@@ -1,3 +1,5 @@
+// Trang Routes chứa các phần tử để điều hướng
+
 import React, { Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import UserTemplate from "../template/userTemplate/UserTemplate";

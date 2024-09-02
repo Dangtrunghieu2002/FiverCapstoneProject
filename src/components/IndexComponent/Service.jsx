@@ -60,7 +60,7 @@ const Service = () => {
     },
   ];
   return (
-    <div className="container py-10 px-5 sm:px-3">
+    <div className="container py-10 px-5 sm:px-3 lg:px-0">
       <h3 className="mb-10 text-5xl">Popular service</h3>
       <div className="grid grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-10 xl:gap-5">
         {

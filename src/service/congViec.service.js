@@ -6,5 +6,8 @@ export const congViecService = {
     },
     layMenuLoaiCongViec : () => {
         return http.get("/cong-viec/lay-menu-loai-cong-viec")
+    },
+    layCongViecTheoMaChiTietLoai: (data) => {
+        return http.get(`/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${data}`)
     }
 }

@@ -8,21 +8,20 @@ const Banner = () => {
   console.log(listJobApi);
   return (
     <div className="container py-10 px-5 sm:px-3 lg:px-0">
-      <div className="bg-[url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/84c449beda884aa8f9f72023e2d8b3fd-1705308514872/hero-lg-x1.png')] h-[668px] w-full bg-cover bg-center rounded-3xl flex flex-col">
+      <div className="bg-[url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/84c449beda884aa8f9f72023e2d8b3fd-1705308514872/hero-lg-x1.png')]  h-[300px] md:h-[468px] lg:h-[560px] w-full bg-cover bg-center rounded-3xl flex flex-col items-center ">
         <div className="flex justify-center items-center flex-col h-full">
-          <h3 className="text-white text-[30px] lg:text-[45px] xl:text-[60px] font-semibold">
+          <h3 className="text-white text-[30px] lg:text-[45px] xl:text-[60px] font-semibold text-center">
             Scale your professional <br />{" "}
-            <span className="relative -left-[20px] lg:-left-[35px]">
-              workforce with freelancers
-            </span>
+              workforce with <span className="font font-thin">freelancers</span>
+
           </h3>
-          <div className="relative -left-[20px] lg:-left-[35px]">
+          <div className="mt-7">
             <WrapperSuggestJob>
               <FormSearchProduct />
             </WrapperSuggestJob>
           </div>
         </div>
-        <div className="flex justify-center items-center mb-10 opacity-40 gap-10">
+        <div className=" hidden lg:flex justify-center items-center mb-10 opacity-40 gap-10">
           <h3 className="text-gray-200 font-semibold text-sm">Trusted by:</h3>
           <ul className="flex gap-10 items-center">
             <li>

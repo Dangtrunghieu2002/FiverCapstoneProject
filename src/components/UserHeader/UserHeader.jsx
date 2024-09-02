@@ -1,3 +1,5 @@
+// Header cho tất cả layout
+
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoIcon from "../icon/LogoIcon";
@@ -6,6 +8,8 @@ import { useSelector } from "react-redux";
 import { Avatar, Dropdown } from "antd";
 import UserIcon from "../icon/UserIcon";
 import LogOutIcon from "../icon/LogOutIcon";
+import WrapperSuggestJob from "../Wrapper/WrapperSuggestJob";
+import FormSearchProduct from "../Form/FormSearchProduct";
 
 const items = [
   {
@@ -60,13 +64,16 @@ const UserHeader = () => {
     );
   };
   return (
-    <header className="px-5 py-6 xl:px-0 border-b sticky">
+    <header className="px-5 py-4 xl:px-0 border-b sticky">
       <div className="container">
         <div className="header_content flex items-center justify-between space-x-5 min-w-full">
-          <div className="header_logo">
+          <div className="header_logo flex items-center gap-8">
             <Link to={path.homePage}>
               <LogoIcon />
             </Link>
+            <WrapperSuggestJob>
+              <FormSearchProduct />
+            </WrapperSuggestJob>
           </div>
           <div className="flex header_navigate gap-3 lg:gap-6 font-semibold text-lg justify-end items-center">
             <h3 className="flex items-center gap-1 hover:bg-gray-100 rounded-md py-[7px] px-4">

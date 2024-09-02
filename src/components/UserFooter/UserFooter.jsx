@@ -1,3 +1,5 @@
+// footer cho tất cả layout
+
 import React from "react";
 
 const UserFooter = () => {

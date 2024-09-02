@@ -2,7 +2,7 @@ import React from "react";
 
 const Video = () => {
   return (
-    <div className="container py-10 px-5 sm:px-3">
+    <div className="container py-10 px-5 sm:px-3 lg:px-0">
       <h3 className="text-[42px]">What success on Fiverr looks like</h3>
       <p className="mt-3 text-lg ">
         Vontélle Eyewear turns to Fiverr freelancers to bring their vision to
