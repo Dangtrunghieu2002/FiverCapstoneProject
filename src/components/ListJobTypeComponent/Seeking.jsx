@@ -4,7 +4,7 @@ const Seeking = () => {
   return (
     <div className="container py-10 px-5 sm:px-3 lg:px-0">
       <div>
-        <div className="block space-y-20 lg:space-y-0 lg:flex justify-between items-center border rounded-lg pl-10 py-10 xl:py-0">
+        <div className="block space-y-20 lg:space-y-0 lg:flex justify-between items-center border rounded-lg pl-10 py-10 2xl:py-0">
           <div>
             <h3 className="text-4xl font-bold">
               Seeking a <span className="font-thin font">full suite of services?</span>

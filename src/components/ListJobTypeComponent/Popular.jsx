@@ -48,7 +48,7 @@ const Popular = () => {
               alt=""
               className="w-[48px] h-[48px]"
             /> 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <h3 className="text-[16px] font-semibold">Minimalist Logo Design</h3>
               <svg
                 width="16"

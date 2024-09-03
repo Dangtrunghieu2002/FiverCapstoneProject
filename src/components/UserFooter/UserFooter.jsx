@@ -6,7 +6,7 @@ const UserFooter = () => {
   return (
     <footer className="border-t mt-10">
       <div className="container py-10 px-5 sm:px-3 mt-5">
-        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 border-b py-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 border-b py-5 gap-5">
           <div>
             <h3 className="text-lg font-semibold mb-4">Categories</h3>
             <ul className="text-lg text-gray-500">

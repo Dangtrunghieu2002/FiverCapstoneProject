@@ -7,7 +7,7 @@ const Interested = ({ jobType }) => {
         You might be interested in {jobType?.tenLoaiCongViec}
       </h3>
       <div className="mt-10 space-y-5">
-        <div className="flex flex-col lg:flex-row gap-3 items-center justify-center ">
+        <div className="flex flex-col lg:flex-row gap-1 2xl:gap-3 items-center justify-center">
           <p className="px-4 py-2 rounded-full font-bold  bg-[#EFEFF0] text-sm hover:underline">
             Background Removal
           </p>
@@ -30,8 +30,8 @@ const Interested = ({ jobType }) => {
             Midjourney Artists
           </p>
         </div>
-        <div className="hidden lg:flex gap-3 items-center justify-center">
-          <p className="px-4 py-2 rounded-full font-bold  bg-[#EFEFF0] text-sm hover:underline">
+        <div className="hidden lg:flex gap-1 2xl:gap-3 items-center justify-center">
+          <p className="px-4 py-2 rounded-full font-bold  bg-[#EFEFF0] text-sm hover:underline hidden 2xl:block">
             Children Illustrations
           </p>
           <p className="px-4 py-2 rounded-full font-bold  bg-[#EFEFF0] text-sm hover:underline">
