@@ -26,7 +26,7 @@ const LogoMaker = () => {
               <path d="M248.8,24.6L248.8,24.6c0,0.6-0.2,1.2-0.7,1.7c-0.4,0.4-1,0.7-1.6,0.7c-0.3,0-0.6-0.1-0.9-0.2 c-0.3-0.1-0.5-0.3-0.7-0.5c-0.2-0.2-0.4-0.5-0.5-0.7c-0.1-0.3-0.2-0.6-0.2-0.9v0c0-0.3,0.1-0.6,0.2-0.9c0.1-0.3,0.3-0.5,0.5-0.7 c0.2-0.2,0.5-0.4,0.7-0.5c0.3-0.1,0.6-0.2,0.9-0.2c0.6,0,1.2,0.2,1.6,0.7C248.6,23.4,248.8,24,248.8,24.6z"></path>
             </g>
           </svg>
-          <h3 className="text-[50px] leading-[50px]">Make an incredible logo <span className="text-[#FC832B]">in seconds</span></h3>
+          <h3 className="text-[50px] leading-[50px]">Make an incredible logo <span className="text-[#FC832B] font">in seconds</span></h3>
           <p className="text-xl">Pre-designed by top talent. Just add your touch.</p>
           <div className="mt-5">
           <button className="py-2 px-5 text-white text-xl font-semibold bg-black rounded-lg">Try Fiverr Logo Maker</button>

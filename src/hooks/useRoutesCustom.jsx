@@ -10,6 +10,7 @@ import ListJobPage from "../pages/ListJobPage/ListJobPage";
 import { Skeleton } from "antd";
 import IndexPage from "../pages/IndexPage/IndexPage";
 import ListJobType from "../pages/ListJobType/ListJobType";
+import JobDetailPage from "../pages/JobDetailPage/JobDetailPage";
 
 const useRoutesCustom = () => {
   const routes = useRoutes([
@@ -28,6 +29,10 @@ const useRoutesCustom = () => {
         {
           path: path.jobType,
           element: <ListJobType />
+        },
+        {
+          path:path.jobDetail,
+          element:<JobDetailPage />
         }
       ],
     },

@@ -5,5 +5,6 @@ export const path = {
     signIn : "/sign-in",
     listJob : "/list-job",
     jobType: "/job-type",
+    jobDetail: "/job-detail",
     admin : "/admin"
 }

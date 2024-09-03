@@ -17,7 +17,7 @@ const Solution = () => {
             </g>
           </svg>
           <h3 className="text-[50px]">
-            The <span className="text-[#1DBF73]">premium</span> freelance solution for businesses
+            The <span className="text-[#1DBF73] font">premium</span> freelance solution for businesses
           </h3>
           <div className="grid grid-cols-2 gap-10 mt-5">
             <div className="flex flex-col ">

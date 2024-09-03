@@ -23,19 +23,25 @@ const items = [
   },
   {
     label: (
-      <Link className="flex gap-2 items-center">
+      <Link
+        className="flex gap-2 items-center"
+        onClick={() => {
+          localStorage.removeItem("user");
+        }}
+      >
         <LogOutIcon />
         Đăng xuất
       </Link>
     ),
-    key: "0",
+    key: "1",
   },
 ];
 
 const UserHeader = () => {
   const { inforUser } = useSelector((state) => state.authSlice);
+  const inforUser2 = localStorage.getItem("user")
   const checkUserLogin = () => {
-    return inforUser ? (
+    return inforUser2 ? (
       <Dropdown
         menu={{
           items,
@@ -64,7 +70,7 @@ const UserHeader = () => {
     );
   };
   return (
-    <header className="px-5 py-4 xl:px-0 border-b sticky ">
+    <header className="px-5 py-4 xl:px-0 border-b sticky top-0 bg-[#fff] z-[9999]">
       <div className="container">
         <div className="header_content flex items-center justify-between space-x-5 min-w-full">
           <div className="header_logo flex items-center gap-8">

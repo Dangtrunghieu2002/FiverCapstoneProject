@@ -1,7 +1,7 @@
 // Trang công việc
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { congViecService } from "../../service/congViec.service";
 import { useSelector } from "react-redux";
 import { path } from "../../common/path";
@@ -177,8 +177,9 @@ const ListJobPage = () => {
         </div>
         <div className="grid grid-cols-4 gap-7 mt-3">
           {listJob?.map((item, index) => {
+            console.log(item)
             return (
-              <div className="">
+              <Link to={`${path.jobDetail}?MaCongViec=${item.congViec.id}`} className="inline-block">
                 <img
                   src={item.congViec.hinhAnh}
                   className="w-full max-h-[240px] object-cover rounded-xl"
@@ -251,7 +252,7 @@ const ListJobPage = () => {
                     </h3>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
