@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Sidebar from '../AdminSideBar/Sidebar';
+import Sidebar from '../../components/AdminSideBar/AdminSideBar';
 import AdminManagement from '../AdminManagement';
 import Topbar from '../AdminTopBar/Topbar';
 
