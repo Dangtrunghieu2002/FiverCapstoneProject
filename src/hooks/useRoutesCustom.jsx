@@ -3,7 +3,7 @@
 import React, { Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import UserTemplate from "../template/userTemplate/UserTemplate";
-import PageNotFound from "../components/PageNotFound/PageNotFound";
+import PageNotFound from "../components/PageNotFound/PageNotFound"
 import { path } from "../common/path";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import ListJobPage from "../pages/ListJobPage/ListJobPage";
