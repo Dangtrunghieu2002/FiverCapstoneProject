@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import HomePage from './pages/HomePage.jsx';
-import AdminPage from './pages/AdminPage.jsx';
-import CustomerPage from './pages/CustomerPage.jsx';
-import LoginPage from './pages/LoginPage.jsx'; // Import your login component
+import AdminTemplate from './src/template/adminTemplate/AdminTemplate.jsx';
+import UserTemplate from './src/template/userTemplate/UserTemplate.jsx';
+import LoginPage from './src/pages/LoginPage/LoginPage.jsx';
 
 function App() {
-  const [user, setUser] = useState(null); // Store logged-in user info
+  const [user, setUser] = useState(null);
 
-  // Function to handle login, and set user role (either 'admin' or 'customer')
   const handleLogin = (role) => {
     setUser({ role });
   };
 
-  // Protect routes by redirecting to login if no user is logged in
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
@@ -31,17 +28,17 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={UserTemplate} />
           <Route path="/login">
             <LoginPage onLogin={handleLogin} />
           </Route>
           <PrivateRoute
             path="/admin"
-            component={user?.role === 'admin' ? AdminPage : HomePage} // Redirect to HomePage if not admin
+            render={(props) => user?.role === 'admin' ? <AdminTemplate {...props} /> : <UserTemplate {...props} />}
           />
           <PrivateRoute
-            path="/customer"
-            component={user?.role === 'customer' ? CustomerPage : HomePage} // Redirect to HomePage if not customer
+            path="/user"
+            render={(props) => user?.role === 'user' ? <UserTemplate {...props} /> : <AdminTemplate {...props} />}
           />
         </Switch>
       </div>
