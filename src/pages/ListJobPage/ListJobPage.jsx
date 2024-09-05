@@ -175,7 +175,7 @@ const ListJobPage = () => {
             </span>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-7 mt-3">
+        <div className="grid grid-cols-4 gap-10 mt-3">
           {listJob?.map((item, index) => {
             console.log(item)
             return (

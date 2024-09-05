@@ -11,6 +11,7 @@ import { Skeleton } from "antd";
 import IndexPage from "../pages/IndexPage/IndexPage";
 import ListJobType from "../pages/ListJobType/ListJobType";
 import JobDetailPage from "../pages/JobDetailPage/JobDetailPage";
+import SignUpPage from "../pages/SignUpPage/SignUpPage";
 
 const useRoutesCustom = () => {
   const routes = useRoutes([
@@ -44,6 +45,10 @@ const useRoutesCustom = () => {
       path: path.signIn,
       element: <LoginPage />,
     },
+    {
+      path: path.signUp,
+      element : <SignUpPage />
+    }
 
   ]);
   return routes;

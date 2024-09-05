@@ -11,6 +11,7 @@ function App() {
   const showNotification = (content,type,duration = 4000) => {
     toast[type](content, {
       position: "top-right",
+      zIndex:999999,
       autoClose: duration,
       hideProgressBar: false,
       closeOnClick: true,
