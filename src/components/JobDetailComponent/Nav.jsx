@@ -4,7 +4,7 @@ const Nav = ({ jobDetail }) => {
   console.log(jobDetail);
   return (
     <div className="container py-10 px-5 sm:px-3 lg:px-0">
-      <div className="flex justify-between items-center">
+      <div className="block space-y-10 lg:space-y-0 lg:flex justify-between items-center">
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <svg
             width="16"

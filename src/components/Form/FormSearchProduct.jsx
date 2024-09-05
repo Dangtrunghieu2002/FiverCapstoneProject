@@ -36,7 +36,7 @@ const FormSearchProduct = ({ setOpenDropDown, handleGetValueChildren }) => {
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="hidden lg:inline-flex"
+        className=" lg:inline-flex"
       >
         <div className="flex pl-5 w-[350px] xl:w-[500px] 2xl:w-[600px] bg-white rounded-lg border border-gray-300 py-1">
           <input

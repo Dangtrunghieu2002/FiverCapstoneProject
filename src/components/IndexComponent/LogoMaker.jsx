@@ -4,7 +4,7 @@ const LogoMaker = () => {
   return (
     <div className="container py-10 px-5 sm:px-3 lg:px-0">
       <div className="w-full bg-[#FFF6F2] rounded-3xl py-8 px-6 md:p-10 lg:py-[50px] lg:px-[70px] flex justify-between items-center">
-        <div className="flex flex-col gap-10 w-[35%]">
+        <div className="flex flex-col gap-10 lg:w-[55%]">
           <svg
             width="249"
             height="34"
@@ -32,7 +32,7 @@ const LogoMaker = () => {
           <button className="py-2 px-5 text-white text-xl font-semibold bg-black rounded-lg">Try Fiverr Logo Maker</button>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="hidden lg:block w-1/2">
           <img
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_460,dpr_1.0/v1/attachments/generic_asset/asset/55292bd34319d97ef4e9fd48d9f8758d-1704795769965/logo-maker-lohp.png"
             alt=""

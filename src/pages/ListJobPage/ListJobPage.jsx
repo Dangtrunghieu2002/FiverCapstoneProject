@@ -47,7 +47,7 @@ const ListJobPage = () => {
     <>
       <UserNav />
       <div className="py-4 px-5 sm:px-3 lg:px-0 border-b bg-[#F5F5F5]">
-        <div className="container flex gap-2 items-center">
+        <div className="container flex gap-2 items-center overflow-scroll scrollbar-hide">
           <h3 className="text-lg font-semibold mr-5">Suggested</h3>
           <h3 className="py-1 px-3 bg-[#fff] border-[1px] rounded-md text-sm font-medium hover:border-black hover:bg-[#EFEFF0]">
             website development
@@ -81,8 +81,8 @@ const ListJobPage = () => {
               : "List job"}
           </span>
         </h1>
-        <div className="flex justify-between items-end">
-          <div className="mt-10 flex gap-3 items-center">
+        <div className="block lg:flex space-y-10 lg:space-y-0 gap-10 justify-between items-end">
+          <div className="mt-10 flex gap-3 items-center overflow-scroll scrollbar-hide">
             <div className="flex gap-2 items-center px-7 py-3 rounded-lg border hover:bg-[#F5F5F5]">
               <h3 className="font-bold">Category</h3>
               <svg
@@ -144,7 +144,7 @@ const ListJobPage = () => {
               </svg>
             </div>
           </div>
-          <div>
+          <div className="">
             <label class="inline-flex items-end cursor-pointer">
               <input type="checkbox" value="" class="sr-only peer" />
               <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600 border-none"></div>
@@ -175,7 +175,7 @@ const ListJobPage = () => {
             </span>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-10 mt-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-3">
           {listJob?.map((item, index) => {
             console.log(item)
             return (

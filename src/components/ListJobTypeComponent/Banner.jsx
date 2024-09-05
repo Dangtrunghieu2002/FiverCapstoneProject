@@ -2,7 +2,14 @@ import React from "react";
 
 const Banner = ({ jobType }) => {
   const scrollRef = React.useRef(null);
-
+  const bannerImg = {
+    1: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/509f310d48d17eafe768a87f78d10af8-1688626459703/G_D-%20Desktop%20banner.png`,
+    2: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/0426b6ab656cedb4697336a530541d50-1688626333573/Digital%20Marketing-%20Desktop%20banner.png`,
+    3: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/6de5a002b40043ab739b6382daf94e37-1688626851418/W_T-%20Desktop%20banner.png`,
+    4: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/c5be9e1ff7a9c16910688aa6b7b5ffee-1688626700100/V_A-%20Desktop%20banner.png`,
+    5: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/509f310d48d17eafe768a87f78d10af8-1688626492933/M_A-%20Desktop%20banner.png`,
+  };
+  console.log(jobType)
   const scroll = (direction) => {
     if (scrollRef.current) {
       // Lấy kích thước của phần tử chứa và số lượng phần tử muốn cuộn qua
@@ -18,7 +25,9 @@ const Banner = ({ jobType }) => {
   };
   return (
     <div className="container py-10 px-5 sm:px-3 lg:px-0">
-      <div className="bg-[url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/509f310d48d17eafe768a87f78d10af8-1688626459703/G_D-%20Desktop%20banner.png')]  h-[170px] md:h-[200px] lg:h-[250px] w-full bg-cover bg-center rounded-xl flex flex-col items-center justify-center ">
+      <div
+        className={`bg-[url('${bannerImg[jobType?.id]}')]  h-[170px] md:h-[200px] lg:h-[250px] w-full bg-cover bg-center rounded-xl flex flex-col items-center justify-center `}
+      >
         <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white">
           {jobType?.tenLoaiCongViec}
         </h3>
@@ -227,7 +236,7 @@ const Banner = ({ jobType }) => {
             </div>
           </div>
           <button
-            className="absolute top-[-70px] right-[80px] translate-y-5 translate-x-[-25px] transform  py-2 px-3 rounded-full box-shadow z-50 bg-[#FFFFFF]"
+            className="absolute top-[-70px] right-[30px] sm:right-[80px] translate-y-5 translate-x-[-25px] transform  py-2 px-3 rounded-full box-shadow z-50 bg-[#FFFFFF]"
             onClick={() => scroll("left")}
           >
             <svg
@@ -240,7 +249,7 @@ const Banner = ({ jobType }) => {
             </svg>
           </button>
           <button
-            className="absolute top-[-70px] right-[80px] translate-y-5 translate-x-[25px] py-2 px-3 rounded-full box-shadow z-50 bg-[#FFFFFF]"
+            className="absolute top-[-70px] right-[40px] sm:right-[80px]  translate-y-5 translate-x-[25px] py-2 px-3 rounded-full box-shadow z-50 bg-[#FFFFFF]"
             onClick={() => scroll("right")}
           >
             <svg

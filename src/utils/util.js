@@ -1,3 +1,8 @@
+    const a = {
+        1 : "123",
+        2 : "345"
+    }
+
 export function setLocalStorage(key,value) {
     const stringJson = JSON.stringify(value)
     localStorage.setItem(key,stringJson)

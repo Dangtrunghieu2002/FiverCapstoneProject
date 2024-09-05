@@ -3,7 +3,7 @@ import React from "react";
 const Video = () => {
   return (
     <div className="container py-10 px-5 sm:px-3 lg:px-0">
-      <h3 className="text-[42px]">What success on Fiverr looks like</h3>
+      <h3 className="text-[32px] lg:text-[42px]">What success on Fiverr looks like</h3>
       <p className="mt-3 text-lg ">
         Vontélle Eyewear turns to Fiverr freelancers to bring their vision to
         life.
@@ -24,7 +24,7 @@ const Video = () => {
         </video>
       </div>
       <h3 className="text-3xl my-12">Vontélle’s go-to services</h3>
-      <div className="grid grid-cols-5 mt-10 gap-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 mt-10 gap-10">
         <div className="py-6 px-4 rounded-3xl box-shadow flex flex-col gap-3 justify-center items-center hover:shadow-xl duration-300 ease-in-out">
           <img
             src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_80,dpr_1.0/v1/attachments/generic_asset/asset/818fbc450c6b7f14664e7d15584f008b-1722417666557/3D-Industrial-Design_2x.png"
@@ -68,8 +68,8 @@ const Video = () => {
           <h3 className="text-lg font-semibold">Logo Design</h3>
         </div>
       </div>
-      <h3 className="text-[40px] my-20">Make it all happen with freelancers</h3>
-      <div className="grid grid-cols-4 mb-10">
+      <h3 className="text-[30px] lg:text-[40px] my-20">Make it all happen with freelancers</h3>
+      <div className="grid grid-cols-1 lg:grid-cols-4 mb-10 gap-10">
         <div className="flex flex-col items-start gap-2 w-2/3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ const Video = () => {
               stroke-linejoin="round"
             />
           </svg>
-          <p className="text-lg font-semibold">
+          <p className="text-lg">
             Access a pool of top talent across 700 categories
           </p>
         </div>
@@ -127,7 +127,7 @@ const Video = () => {
               stroke-linejoin="round"
             />
           </svg>
-          <p className="text-lg font-semibold">
+          <p className="text-lg">
             Enjoy a simple, easy-to-use matching experience
           </p>
         </div>
@@ -161,7 +161,7 @@ const Video = () => {
               stroke-linejoin="round"
             />
           </svg>
-          <p className="text-lg font-semibold">
+          <p className="text-lg">
             Get quality work done quickly and within budget
           </p>
         </div>
@@ -212,7 +212,7 @@ const Video = () => {
               stroke-linecap="round"
             />
           </svg>
-          <p className="text-lg font-semibold">Only pay when you’re happy</p>
+          <p className="text-lg">Only pay when you’re happy</p>
         </div>
       </div>
       <div className="mt-20 text-center">
