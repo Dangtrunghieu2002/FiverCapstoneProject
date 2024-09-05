@@ -4,7 +4,7 @@ import { path } from "../../common/path";
 const Explore = ({ jobType }) => {
   console.log(jobType);
   return (
-    <div className="container py-10 px-5 sm:px-3 lg:px-0">
+    <div className="container py-10 px-5 sm:px-5 xl:px-0">
       <h3 className="text-2xl font-bold">Explore {jobType?.tenLoaiCongViec}</h3>
       <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10 gap-y-20">
         {jobType?.dsNhomChiTietLoai.map((item, index) => {

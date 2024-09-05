@@ -11,15 +11,15 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide"),],
 }
 
-module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/flowbite/**/*.js"
-  ],
-  plugins: [
-    require('flowbite/plugin')
-  ],
-};
+// module.exports = {
+//   content: [
+//     "./src/**/*.{js,jsx,ts,tsx}",
+//     "./node_modules/flowbite/**/*.js"
+//   ],
+//   plugins: [
+//     require('flowbite/plugin')
+//   ],
+// };

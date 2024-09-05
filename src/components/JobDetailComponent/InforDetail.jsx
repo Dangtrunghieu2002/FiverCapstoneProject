@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Tabs } from "antd";
 import ImageTabs from "./ImageTabs";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { binhLuanService } from "../../service/binhLuan.service";
+import CommentComponent from "./CommentComponent";
+import { thueCongViec } from "../../service/thueCongViec.service";
+import { getLocalStorage } from "../../utils/util";
+import { useNavigate } from "react-router-dom";
+import { path } from "../../common/path";
+import { NotificationContext } from "../../../App";
 const InforDetail = ({ jobDetail }) => {
   const [i, setI] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
-  const a = jobDetail?.congViec.moTaNgan
-    .split("\n")
-    .filter((item) => item !== "\r");
-  const b = jobDetail?.congViec.moTa
-    .split("\n")
-    .filter((item) => item !== "\r");
-  console.log(b);
-
+  const [comment, setComment] = useState([]);
+  const navigate = useNavigate();
+  const { showNotification } = useContext(NotificationContext);
+  console.log(jobDetail);
   const img = [
     jobDetail?.congViec.hinhAnh,
     `https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/95160836/original/c76e3bafcd31d8e9af171307c93ff18a36685208/diseno-logotipo-con-calidad-profesional.png`,
@@ -23,6 +31,55 @@ const InforDetail = ({ jobDetail }) => {
     `https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/b8105c4a4200210795aa92a08b3df645-1725144377/VIO%20CAKE.2-01/diseno-logotipo-con-calidad-profesional.png`,
     `https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs2/115633468/original/2f1b8dbc9f572114546848a8e37ce75fd1f80bfa/design-a-modern-wordpress-business-website-or-blog.jpg`,
   ];
+
+  const data = {
+    id: 0,
+    maCongViec: jobDetail?.congViec.id,
+    maNguoiThue: getLocalStorage("user")?.user.id || "",
+    ngayThue: new Date(),
+    hoanThanh: false,
+  };
+  const handleHired = (data) => {
+    if (getLocalStorage("user")?.token) {
+      thueCongViec
+        .thueCongViec(data, getLocalStorage("user").token)
+        .then((res) => {
+          showNotification("Bạn đã thêm công việc thành công", "success");
+          console.log(res);
+        })
+        .catch((err) => {
+          showNotification("Có lỗi xảy ra vui lòng thử lại", "error");
+          console.log(err);
+        });
+    } else {
+      navigate(path.signIn);
+    }
+  };
+  const a = jobDetail?.congViec.moTaNgan
+    .split("\n")
+    .filter((item) => item !== "\r");
+  const b = jobDetail?.congViec.moTa
+    .split("\n")
+    .filter((item) => item !== "\r");
+  useEffect(() => {
+    binhLuanService
+      .layBinhLuanTheoCongViec(jobDetail?.congViec.id)
+      .then((res) => {
+        setComment(res.data.content);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, [jobDetail]);
+  // useEffect(() => {
+  //   thueCongViec
+  //     .thueCongViec(data, getLocalStorage("user").token)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   // Nội dung cho từng tab
   const getTabContent = () => {
@@ -84,7 +141,7 @@ const InforDetail = ({ jobDetail }) => {
               </div>
             </div>
             <div className="mt-10 space-y-5">
-              {a?.slice(2).map((item, index) => {
+              {a?.map((item, index) => {
                 return (
                   <div className="flex gap-5 items-center">
                     <div>
@@ -102,7 +159,12 @@ const InforDetail = ({ jobDetail }) => {
                 );
               })}
             </div>
-            <button className="py-2 px-5 bg-black text-white w-full mt-10 rounded-lg font-medium hover:opacity-60">
+            <button
+              onClick={() => {
+                handleHired(data);
+              }}
+              className="py-2 px-5 bg-black text-white w-full mt-10 rounded-lg font-medium hover:opacity-60"
+            >
               Continute
             </button>
             <div className="mt-5 text-center">
@@ -211,7 +273,12 @@ const InforDetail = ({ jobDetail }) => {
                 <p>Logo transparency</p>
               </div>
             </div>
-            <button className="py-2 px-5 bg-black text-white w-full mt-10 rounded-lg font-medium hover:opacity-60">
+            <button
+              onClick={() => {
+                handleHired(data);
+              }}
+              className="py-2 px-5 bg-black text-white w-full mt-10 rounded-lg font-medium hover:opacity-60"
+            >
               Continute
             </button>
             <div className="mt-5 text-center">
@@ -346,7 +413,12 @@ const InforDetail = ({ jobDetail }) => {
                 <p>Include social media kit</p>
               </div>
             </div>
-            <button className="py-2 px-5 bg-black text-white w-full mt-10 rounded-lg font-medium hover:opacity-60">
+            <button
+              onClick={() => {
+                handleHired(data);
+              }}
+              className="py-2 px-5 bg-black text-white w-full mt-10 rounded-lg font-medium hover:opacity-60"
+            >
               Continute
             </button>
             <div className="mt-5 text-center">
@@ -361,8 +433,8 @@ const InforDetail = ({ jobDetail }) => {
 
   return (
     <div className="container w-full">
-      <div className="flex justify-between">
-        <div className="w-2/3">
+      <div className="block lg:flex gap-20 justify-between">
+        <div className="w-full lg:w-2/3">
           <h3 className="text-3xl font-bold">
             {jobDetail?.congViec.tenCongViec}
           </h3>
@@ -496,7 +568,7 @@ const InforDetail = ({ jobDetail }) => {
                   alt=""
                 />
               </div>
-              <div className="mt-3 flex gap-2">
+              <div className="mt-3 flex gap-2 overflow-scroll scrollbar-hide">
                 {img.map((item, index) => {
                   return (
                     <img
@@ -508,7 +580,7 @@ const InforDetail = ({ jobDetail }) => {
                       }}
                       className={`${
                         activeIndex === index ? "" : "opacity-30"
-                      } w-[100px] h-[65px]`}
+                      } max-w-[100px] xl:h-[65px]`}
                       alt=""
                     />
                   );
@@ -559,19 +631,957 @@ const InforDetail = ({ jobDetail }) => {
               </p>
               <div className="">
                 <ul className="mt-2 space-y-2">
-                  <li className="list-disc translate-x-10"><span className="bg-[#FFECD1] font-bold inline-block italic">I have created + 2000 successful brand identities on Fiverr.</span></li>
-                  <li className="list-disc translate-x-10"><span className="bg-[#FFECD1] font-bold inline-block italic">All the files and resources to use your design as you wish.</span></li>
-                  <li className="list-disc translate-x-10"><span className="bg-[#FFECD1] font-bold inline-block italic">Expert & trustworthy advice at any time.</span></li>
-                  <li className="list-disc translate-x-10"><span className="bg-[#FFECD1] font-bold inline-block italic">Copyrights document on all my packages.</span></li>
-                  <li className="list-disc translate-x-10"><span className="bg-[#FFECD1] font-bold inline-block italic">100% custom and unique designs.</span></li>
-                  <li className="list-disc translate-x-10"><span className="bg-[#FFECD1] font-bold inline-block italic">My work DOESN'T END UNTIL you are 100% SATISFIED with the design.</span></li>
+                  <li className="list-disc translate-x-10">
+                    <span className="bg-[#FFECD1] font-bold inline-block italic">
+                      I have created + 2000 successful brand identities on
+                      Fiverr.
+                    </span>
+                  </li>
+                  <li className="list-disc translate-x-10">
+                    <span className="bg-[#FFECD1] font-bold inline-block italic">
+                      All the files and resources to use your design as you
+                      wish.
+                    </span>
+                  </li>
+                  <li className="list-disc translate-x-10">
+                    <span className="bg-[#FFECD1] font-bold inline-block italic">
+                      Expert & trustworthy advice at any time.
+                    </span>
+                  </li>
+                  <li className="list-disc translate-x-10">
+                    <span className="bg-[#FFECD1] font-bold inline-block italic">
+                      Copyrights document on all my packages.
+                    </span>
+                  </li>
+                  <li className="list-disc translate-x-10">
+                    <span className="bg-[#FFECD1] font-bold inline-block italic">
+                      100% custom and unique designs.
+                    </span>
+                  </li>
+                  <li className="list-disc translate-x-10">
+                    <span className="bg-[#FFECD1] font-bold inline-block italic">
+                      My work DOESN'T END UNTIL you are 100% SATISFIED with the
+                      design.
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
-            <p className="font-bold text-xl">Get the best experience! - ORDER NOW!!!</p>
+            <p className="font-bold text-xl border-b pb-10">
+              Get the best experience! - ORDER NOW!!!
+            </p>
+            <div className="mt-5 flex items-center justify-between w-1/2 ">
+              <div>
+                <p className="opacity-60">Logo style</p>
+                <p>Minimalist</p>
+              </div>
+              <div>
+                <p className="opacity-60">File format</p>
+                <p>AI, JPG, PDF, PNG, PSD, EPS, SVG</p>
+              </div>
+            </div>
+            <div className="mt-10">
+              <h3 className="font-bold text-xl">
+                Get to know about {jobDetail?.tenNguoiTao}
+              </h3>
+              <div className="flex gap-5 items-center mt-5">
+                <div className="w-[96px] h-[96px] relative">
+                  <img
+                    src={jobDetail?.avatar}
+                    className="w-full rounded-full"
+                    alt=""
+                  />
+                  <svg
+                    width="35"
+                    height="35"
+                    viewBox="0 0 14 14"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#fff"
+                    className="absolute top-[60px] right-0 bg-[#2E25AD] rounded-full p-1"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M8.203.432a1.891 1.891 0 0 0-2.406 0l-1.113.912a1.904 1.904 0 0 1-.783.384l-1.395.318c-.88.2-1.503.997-1.5 1.915l.007 1.456c0 .299-.065.594-.194.863L.194 7.59a1.978 1.978 0 0 0 .535 2.388l1.12.903c.231.185.417.422.543.692l.615 1.314a1.908 1.908 0 0 0 2.166 1.063l1.392-.33c.286-.068.584-.068.87 0l1.392.33a1.908 1.908 0 0 0 2.166-1.063l.615-1.314c.126-.27.312-.507.542-.692l1.121-.903c.707-.57.93-1.563.535-2.388l-.625-1.309a1.983 1.983 0 0 1-.194-.863l.006-1.456a1.947 1.947 0 0 0-1.5-1.915L10.1 1.728a1.904 1.904 0 0 1-.784-.384L8.203.432Zm2.184 5.883a.742.742 0 0 0 0-1.036.71.71 0 0 0-1.018 0L6.565 8.135 5.095 6.73a.71.71 0 0 0-1.018.032.742.742 0 0 0 .032 1.036L6.088 9.69a.71.71 0 0 0 1.001-.016l3.297-3.359Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-bold text-lg">
+                    {jobDetail?.tenNguoiTao}
+                  </h3>
+                  <p className="opacity-60">
+                    Full time {jobDetail?.tenLoaiCongViec}
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1 items-center pr-2">
+                      <div className="flex gap-1 items-center">
+                        <svg
+                          width="16"
+                          height="15"
+                          viewBox="0 0 16 15"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                          ></path>
+                        </svg>
+                        <p className="mt-1 font-bold text-lg">
+                          {jobDetail?.congViec.saoCongViec}
+                        </p>
+                      </div>
+                      <p className="text-lg mt-1 opacity-50">
+                        (
+                        <span className="underline">
+                          {jobDetail?.congViec.danhGia})
+                        </span>
+                      </p>
+                    </div>
+                    <div className="bg-gray-500 w-[1px] h-[20px] opacity-60"></div>
+                    <div className="flex items-center gap-1 px-2 rounded-md bg-[#FFE0B3]">
+                      <h3 className="text-sm font-bold">Top Rated</h3>
+                      <div className="flex">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 10 10"
+                          width="10"
+                          height="10"
+                          fill="currentColor"
+                        >
+                          <path d="M4.839.22a.2.2 0 0 1 .322 0l1.942 2.636a.2.2 0 0 0 .043.043L9.782 4.84a.2.2 0 0 1 0 .322L7.146 7.105a.2.2 0 0 0-.043.043L5.161 9.784a.2.2 0 0 1-.322 0L2.897 7.148a.2.2 0 0 0-.043-.043L.218 5.163a.2.2 0 0 1 0-.322l2.636-1.942a.2.2 0 0 0 .043-.043L4.839.221Z"></path>
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 10 10"
+                          width="10"
+                          height="10"
+                          fill="currentColor"
+                        >
+                          <path d="M4.839.22a.2.2 0 0 1 .322 0l1.942 2.636a.2.2 0 0 0 .043.043L9.782 4.84a.2.2 0 0 1 0 .322L7.146 7.105a.2.2 0 0 0-.043.043L5.161 9.784a.2.2 0 0 1-.322 0L2.897 7.148a.2.2 0 0 0-.043-.043L.218 5.163a.2.2 0 0 1 0-.322l2.636-1.942a.2.2 0 0 0 .043-.043L4.839.221Z"></path>
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 10 10"
+                          width="10"
+                          height="10"
+                          fill="currentColor"
+                        >
+                          <path d="M4.839.22a.2.2 0 0 1 .322 0l1.942 2.636a.2.2 0 0 0 .043.043L9.782 4.84a.2.2 0 0 1 0 .322L7.146 7.105a.2.2 0 0 0-.043.043L5.161 9.784a.2.2 0 0 1-.322 0L2.897 7.148a.2.2 0 0 0-.043-.043L.218 5.163a.2.2 0 0 1 0-.322l2.636-1.942a.2.2 0 0 0 .043-.043L4.839.221Z"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button className="mt-5 py-2 px-5 rounded-md border border-black font-semibold hover:bg-black hover:text-white duration-100 ease-in-out">
+                Contact Me
+              </button>
+              <div className="mt-10">
+                <h3 className="text-xl font-bold">FAQ</h3>
+                <div className="mt-5">
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1-content"
+                      id="panel1-header"
+                    >
+                      <Typography>
+                        <span className="font-bold text-lg">
+                          Why choose Creeddesigners?
+                        </span>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        <span className="font-medium">
+                          We love to discuss new projects and plan them with
+                          you, and we always bring years of knowledge and
+                          experience with us. Each project is a unique
+                          experience in itself and brings personal and
+                          professional progress not only to you, but also to us.
+                          We offer a unique logo design.
+                        </span>
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1-content"
+                      id="panel1-header"
+                    >
+                      <Typography>
+                        <span className="font-bold text-lg">
+                          What information do I need to get started?
+                        </span>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        <span className="font-medium">
+                          We love to discuss new projects and plan them with
+                          you, and we always bring years of knowledge and
+                          experience with us. Each project is a unique
+                          experience in itself and brings personal and
+                          professional progress not only to you, but also to us.
+                          We offer a unique logo design.
+                        </span>
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>{" "}
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1-content"
+                      id="panel1-header"
+                    >
+                      <Typography>
+                        <span className="font-bold text-lg">
+                          What is Social Media Kit include?
+                        </span>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        <span className="font-medium">
+                          We love to discuss new projects and plan them with
+                          you, and we always bring years of knowledge and
+                          experience with us. Each project is a unique
+                          experience in itself and brings personal and
+                          professional progress not only to you, but also to us.
+                          We offer a unique logo design.
+                        </span>
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>{" "}
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1-content"
+                      id="panel1-header"
+                    >
+                      <Typography>
+                        <span className="font-bold text-lg">
+                          Profile picture and banner for facebook, twitter or
+                          any other social media platform.
+                        </span>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        <span className="font-medium">
+                          We love to discuss new projects and plan them with
+                          you, and we always bring years of knowledge and
+                          experience with us. Each project is a unique
+                          experience in itself and brings personal and
+                          professional progress not only to you, but also to us.
+                          We offer a unique logo design.
+                        </span>
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>{" "}
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1-content"
+                      id="panel1-header"
+                    >
+                      <Typography>
+                        <span className="font-bold text-lg">
+                          What is Stationery Designs include?
+                        </span>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        <span className="font-medium">
+                          We love to discuss new projects and plan them with
+                          you, and we always bring years of knowledge and
+                          experience with us. Each project is a unique
+                          experience in itself and brings personal and
+                          professional progress not only to you, but also to us.
+                          We offer a unique logo design.
+                        </span>
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>{" "}
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1-content"
+                      id="panel1-header"
+                    >
+                      <Typography>
+                        <span className="font-bold text-lg">
+                          What if I am not satisfied with the design?
+                        </span>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        <span className="font-medium">
+                          We love to discuss new projects and plan them with
+                          you, and we always bring years of knowledge and
+                          experience with us. Each project is a unique
+                          experience in itself and brings personal and
+                          professional progress not only to you, but also to us.
+                          We offer a unique logo design.
+                        </span>
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                </div>
+              </div>
+              <div className="mt-20">
+                <h3 className="font-bold text-xl">Reviews</h3>
+                <div className="flex items-center justify-between">
+                  <p className="mt-5 font-bold">731 reviews for this Gig </p>
+                  <div className="flex items-center gap-2">
+                    <svg
+                      width="16"
+                      height="15"
+                      viewBox="0 0 16 15"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                      ></path>
+                    </svg>
+                    <svg
+                      width="16"
+                      height="15"
+                      viewBox="0 0 16 15"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                      ></path>
+                    </svg>
+                    <svg
+                      width="16"
+                      height="15"
+                      viewBox="0 0 16 15"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                      ></path>
+                    </svg>
+                    <svg
+                      width="16"
+                      height="15"
+                      viewBox="0 0 16 15"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                      ></path>
+                    </svg>
+                    <svg
+                      width="16"
+                      height="15"
+                      viewBox="0 0 16 15"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                      ></path>
+                    </svg>
+                    <p className="font-bold mt-1">4.9</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-1/2">
+                    <div className="flex items-center gap-3 mt-3">
+                      <h3 className="font-bold">5 Start</h3>
+                      <div className="w-[50%] bg-gray-200 rounded-full h-[8px] dark:bg-gray-700">
+                        <div
+                          className="bg-black h-[8px] rounded-full"
+                          style={{ width: "90%" }}
+                        />
+                      </div>
+                      <p className="opacity-60">(672)</p>
+                    </div>
+                    <div className="flex items-center gap-3 mt-3">
+                      <h3 className="font-bold">4 Start</h3>
+                      <div className="w-[50%] bg-gray-200 rounded-full h-[8px] dark:bg-gray-700">
+                        <div
+                          className="bg-black h-[8px] rounded-full"
+                          style={{ width: "8%" }}
+                        />
+                      </div>
+                      <p className="opacity-60">(45)</p>
+                    </div>
+                    <div className="flex items-center gap-3 mt-3">
+                      <h3 className="font-bold">3 Start</h3>
+                      <div className="w-[50%] bg-gray-200 rounded-full h-[8px] dark:bg-gray-700">
+                        <div
+                          className="bg-black h-[8px] rounded-full"
+                          style={{ width: "1%" }}
+                        />
+                      </div>
+                      <p className="opacity-60">(6)</p>
+                    </div>
+                    <div className="flex items-center gap-3 mt-3">
+                      <h3 className="font-bold">2 Start</h3>
+                      <div className="w-[50%] bg-gray-200 rounded-full h-[8px] dark:bg-gray-700">
+                        <div
+                          className="bg-black h-[8px] rounded-full"
+                          style={{ width: "0.5%" }}
+                        />
+                      </div>
+                      <p className="opacity-60">(1)</p>
+                    </div>
+                    <div className="flex items-center gap-3 mt-3">
+                      <h3 className="font-bold">1 Start</h3>
+                      <div className="w-[50%] bg-gray-200 rounded-full h-[8px] dark:bg-gray-700">
+                        <div
+                          className="bg-black h-[8px] rounded-full"
+                          style={{ width: "3%" }}
+                        />
+                      </div>
+                      <p className="opacity-60">(7)</p>
+                    </div>
+                  </div>
+                  <div className="w-1/2 mt-3">
+                    <h3 className="font-bold">Rating Breakdown</h3>
+                    <div className="mt-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <p className="opacity-60">Seller communication level</p>
+                        <div className="flex items-center gap-2">
+                          <svg
+                            width="16"
+                            height="15"
+                            viewBox="0 0 16 15"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                            ></path>
+                          </svg>
+                          <p className="font-bold mt-1">4.9</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="opacity-60">Service as described</p>
+                        <div className="flex items-center gap-2">
+                          <svg
+                            width="16"
+                            height="15"
+                            viewBox="0 0 16 15"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                            ></path>
+                          </svg>
+                          <p className="font-bold mt-1">4.9</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="opacity-60">Recommend to a friend</p>
+                        <div className="flex items-center gap-2">
+                          <svg
+                            width="16"
+                            height="15"
+                            viewBox="0 0 16 15"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                            ></path>
+                          </svg>
+                          <p className="font-bold mt-1">4.9</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-5 flex justify-start">
+              <form class="w-1/2">
+                <div>
+                  <label
+                    htmlFor="default-search"
+                    className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+                  >
+                    Search
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                      <svg
+                        className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                        />
+                      </svg>
+                    </div>
+                    <input
+                      type="search"
+                      id="default-search"
+                      className="block w-full p-4 ps-10 text-sm text-gray-900 border rounded-lg bg-gray-50 "
+                      placeholder="Search Review"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="text-white absolute end-2.5 bottom-2.5 bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <h3 className="mt-5">
+              Sort By <span className="font-bold">Most relevant</span>
+            </h3>
+            <div className="mt-10">
+              <div className="border p-5 rounded-xl">
+                <div className="flex items-center gap-5 border-b pb-5">
+                  <div className="w-[60px] h-[60px]">
+                    <img
+                      src={jobDetail?.avatar}
+                      className="rounded-full"
+                      alt=""
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-bold text-lg">
+                      {jobDetail?.tenNguoiTao}
+                    </h3>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1ec-1f1e7.png"
+                        className="w-[16px] h-[16px]"
+                        alt=""
+                      />
+                      <p className="text-sm opacity-50">United Kingdom</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="py-5 border-b">
+                  <div className="flex items-center gap-10">
+                    <div className="flex items-center gap-1">
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <p className="font-bold mt-1">5</p>
+                    </div>
+                    <p className="text-sm opacity-40 mt-1">2 months ago</p>
+                  </div>
+                  <p className="mt-3">
+                    Great experience. Do not be cheap and go to someone else,
+                    your quality will be compromised. Daniela is top quality and
+                    when she creates a timeline she sticks to it with constant
+                    updates along the way. Overall very happy
+                  </p>
+                  <div className="mt-3 flex items-center gap-10">
+                    <div>
+                      <h3 className="font-bold">US$100-US$200</h3>
+                      <p className="text-sm opacity-50">Price</p>
+                    </div>
+                    <div className="w-[1px] bg-black opacity-10 h-[30px]"></div>
+                    <div>
+                      <h3 className="font-bold">3 days</h3>
+                      <p className="text-sm opacity-50">Duration</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-10">
+                  <div className="flex items-start  gap-3">
+                    <img
+                      src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/f1491de8cc779b07d9cbd98fa2c6de84-1647559036135/18868a73-79c0-460f-aaa8-487ef2579a89.jpg"
+                      className="w-[40px] h-[40px] rounded-full translate-y-[-10px]"
+                      alt=""
+                    />
+                    <div>
+                      <p className="font-bold text-sm">Seller's Response</p>
+                      <p className="mt-5">
+                        It was a real pleasure working with you Bernardo!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-5">
+                <p className="font-bold">Helpful?</p>
+                <div className="flex items-center gap-1">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M11.89 14.75H1C0.59 14.75 0.25 14.41 0.25 14V8C0.25 7.59 0.59 7.25 1 7.25H3.46L6.05 0.72C6.16 0.43 6.44 0.25 6.75 0.25H7.67C8.59 0.25 9.34 0.98 9.34 1.87V5.45H13.17C14 5.45 14.78 5.84 15.27 6.48C15.73 7.1 15.87 7.87 15.66 8.6L14.39 12.93C14.08 13.99 13.06 14.74 11.9 14.74L11.89 14.75ZM4.75 13.25H11.89C12.38 13.25 12.81 12.95 12.94 12.52L14.21 8.19C14.32 7.81 14.16 7.52 14.06 7.39C13.85 7.12 13.53 6.96 13.16 6.96H8.58C8.17 6.96 7.83 6.62 7.83 6.21V1.87C7.83 1.81 7.76 1.75 7.66 1.75H7.25L4.74 8.08V13.25H4.75ZM1.75 13.25H3.25V8.75H1.75V13.25V13.25Z"></path>
+                  </svg>
+                  <p>Yes</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M9.25533 14.75H8.33533C7.41533 14.75 6.66533 14.03 6.66533 13.13L6.66533 9.55H2.83533C2.00533 9.55 1.22533 9.16 0.735326 8.52C0.275326 7.9 0.135326 7.13 0.345326 6.4L1.62533 2.06C1.93533 1 2.95533 0.25 4.11533 0.25L15.0053 0.25C15.4153 0.25 15.7553 0.59 15.7553 1V7C15.7553 7.41 15.4153 7.75 15.0053 7.75H12.5453L9.95533 14.28C9.84533 14.57 9.56533 14.75 9.25533 14.75ZM4.11533 1.75C3.62533 1.75 3.19533 2.05 3.06533 2.48L1.79533 6.81C1.68533 7.19 1.84533 7.48 1.94533 7.61C2.15533 7.88 2.47533 8.04 2.84533 8.04H7.42533C7.83533 8.04 8.17533 8.38 8.17533 8.79L8.17533 13.12C8.17533 13.17 8.24533 13.24 8.34533 13.24H8.75533L11.2653 6.91V1.75L4.11533 1.75ZM12.7553 6.25H14.2553V1.75L12.7553 1.75V6.25Z"></path>
+                  </svg>
+                  <p>No</p>
+                </div>
+              </div>
+            </div>
+            <div className="mt-10">
+              <div className="border p-5 rounded-xl">
+                <div className="flex items-center gap-5 border-b pb-5">
+                  <div className="w-[60px] h-[60px]">
+                    <img
+                      src={jobDetail?.avatar}
+                      className="rounded-full"
+                      alt=""
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-bold text-lg">
+                      {jobDetail?.tenNguoiTao}
+                    </h3>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1ec-1f1e7.png"
+                        className="w-[16px] h-[16px]"
+                        alt=""
+                      />
+                      <p className="text-sm opacity-50">United Kingdom</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="py-5 border-b">
+                  <div className="flex items-center gap-10">
+                    <div className="flex items-center gap-1">
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                        ></path>
+                      </svg>
+                      <p className="font-bold mt-1">5</p>
+                    </div>
+                    <p className="text-sm opacity-40 mt-1">2 months ago</p>
+                  </div>
+                  <p className="mt-3">
+                    Great experience. Do not be cheap and go to someone else,
+                    your quality will be compromised. Daniela is top quality and
+                    when she creates a timeline she sticks to it with constant
+                    updates along the way. Overall very happy
+                  </p>
+                  <div className="mt-3 flex items-center gap-10">
+                    <div>
+                      <h3 className="font-bold">US$100-US$200</h3>
+                      <p className="text-sm opacity-50">Price</p>
+                    </div>
+                    <div className="w-[1px] bg-black opacity-10 h-[30px]"></div>
+                    <div>
+                      <h3 className="font-bold">3 days</h3>
+                      <p className="text-sm opacity-50">Duration</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-10">
+                  <div className="flex items-start gap-3">
+                    <img
+                      src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/f1491de8cc779b07d9cbd98fa2c6de84-1647559036135/18868a73-79c0-460f-aaa8-487ef2579a89.jpg"
+                      className="w-[40px] h-[40px] rounded-full translate-y-[-10px]"
+                      alt=""
+                    />
+                    <div>
+                      <p className="font-bold text-sm">Seller's Response</p>
+                      <p className="mt-5">
+                        It was a real pleasure working with you Bernardo!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-5">
+                <p className="font-bold">Helpful?</p>
+                <div className="flex items-center gap-1">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M11.89 14.75H1C0.59 14.75 0.25 14.41 0.25 14V8C0.25 7.59 0.59 7.25 1 7.25H3.46L6.05 0.72C6.16 0.43 6.44 0.25 6.75 0.25H7.67C8.59 0.25 9.34 0.98 9.34 1.87V5.45H13.17C14 5.45 14.78 5.84 15.27 6.48C15.73 7.1 15.87 7.87 15.66 8.6L14.39 12.93C14.08 13.99 13.06 14.74 11.9 14.74L11.89 14.75ZM4.75 13.25H11.89C12.38 13.25 12.81 12.95 12.94 12.52L14.21 8.19C14.32 7.81 14.16 7.52 14.06 7.39C13.85 7.12 13.53 6.96 13.16 6.96H8.58C8.17 6.96 7.83 6.62 7.83 6.21V1.87C7.83 1.81 7.76 1.75 7.66 1.75H7.25L4.74 8.08V13.25H4.75ZM1.75 13.25H3.25V8.75H1.75V13.25V13.25Z"></path>
+                  </svg>
+                  <p>Yes</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M9.25533 14.75H8.33533C7.41533 14.75 6.66533 14.03 6.66533 13.13L6.66533 9.55H2.83533C2.00533 9.55 1.22533 9.16 0.735326 8.52C0.275326 7.9 0.135326 7.13 0.345326 6.4L1.62533 2.06C1.93533 1 2.95533 0.25 4.11533 0.25L15.0053 0.25C15.4153 0.25 15.7553 0.59 15.7553 1V7C15.7553 7.41 15.4153 7.75 15.0053 7.75H12.5453L9.95533 14.28C9.84533 14.57 9.56533 14.75 9.25533 14.75ZM4.11533 1.75C3.62533 1.75 3.19533 2.05 3.06533 2.48L1.79533 6.81C1.68533 7.19 1.84533 7.48 1.94533 7.61C2.15533 7.88 2.47533 8.04 2.84533 8.04H7.42533C7.83533 8.04 8.17533 8.38 8.17533 8.79L8.17533 13.12C8.17533 13.17 8.24533 13.24 8.34533 13.24H8.75533L11.2653 6.91V1.75L4.11533 1.75ZM12.7553 6.25H14.2553V1.75L12.7553 1.75V6.25Z"></path>
+                  </svg>
+                  <p>No</p>
+                </div>
+              </div>
+            </div>
+            {comment?.map((item, index) => {
+              console.log(item);
+              return (
+                <div className="mt-10">
+                  <div className="border p-5 rounded-xl">
+                    <div className="flex items-center gap-5 border-b pb-5">
+                      <div className="w-[60px] h-[60px]">
+                        <img
+                          src={item.avatar}
+                          className="rounded-full"
+                          alt=""
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <h3 className="font-bold text-lg">
+                          {item.tenNguoiBinhLuan}
+                        </h3>
+                        <div className="flex items-center gap-2">
+                          <img
+                            src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1ec-1f1e7.png"
+                            className="w-[16px] h-[16px]"
+                            alt=""
+                          />
+                          <p className="text-sm opacity-50">United Kingdom</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="py-5 border-b">
+                      <div className="flex items-center gap-10">
+                        <div className="flex items-center gap-1">
+                          {Array.from(
+                            { length: item.saoBinhLuan },
+                            (_, index) => (
+                              <span key={index}>
+                                {" "}
+                                <svg
+                                  width="16"
+                                  height="15"
+                                  viewBox="0 0 16 15"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M16 5.81285C16 5.98299 15.875 6.14367 15.75 6.26654L12.2596 9.61248L13.0865 14.3384C13.0962 14.4045 13.0962 14.4612 13.0962 14.5274C13.0962 14.7732 12.9808 15 12.7019 15C12.5673 15 12.4327 14.9527 12.3173 14.8866L8 12.656L3.68269 14.8866C3.55769 14.9527 3.43269 15 3.29808 15C3.01923 15 2.89423 14.7732 2.89423 14.5274C2.89423 14.4612 2.90385 14.4045 2.91346 14.3384L3.74038 9.61248L0.240385 6.26654C0.125 6.14367 0 5.98299 0 5.81285C0 5.5293 0.298077 5.41588 0.538462 5.37807L5.36539 4.68809L7.52885 0.387524C7.61539 0.207939 7.77885 0 8 0C8.22115 0 8.38462 0.207939 8.47115 0.387524L10.6346 4.68809L15.4615 5.37807C15.6923 5.41588 16 5.5293 16 5.81285Z"
+                                  ></path>
+                                </svg>
+                              </span> // Hiển thị biểu tượng sao, có thể thay đổi theo nhu cầu
+                            )
+                          )}
+                          <p className="font-bold mt-1">{item.saoBinhLuan}</p>
+                        </div>
+                        <p className="text-sm opacity-40 mt-1">2 months ago</p>
+                      </div>
+                      <p className="mt-3">{item.noiDung}</p>
+                      <div className="mt-3 flex items-center gap-10">
+                        <div>
+                          <h3 className="font-bold">US$100-US$200</h3>
+                          <p className="text-sm opacity-50">Price</p>
+                        </div>
+                        <div className="w-[1px] bg-black opacity-10 h-[30px]"></div>
+                        <div>
+                          <h3 className="font-bold">3 days</h3>
+                          <p className="text-sm opacity-50">Duration</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-10">
+                      <div className="flex items-start gap-3">
+                        <img
+                          src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/f1491de8cc779b07d9cbd98fa2c6de84-1647559036135/18868a73-79c0-460f-aaa8-487ef2579a89.jpg"
+                          className="w-[40px] h-[40px] rounded-full translate-y-[-10px]"
+                          alt=""
+                        />
+                        <div>
+                          <p className="font-bold text-sm">Seller's Response</p>
+                          <p className="mt-5">
+                            It was a real pleasure working with you{" "}
+                            {item.tenNguoiBinhLuan}!
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-3 flex items-center gap-5">
+                    <p className="font-bold">Helpful?</p>
+                    <div className="flex items-center gap-1">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M11.89 14.75H1C0.59 14.75 0.25 14.41 0.25 14V8C0.25 7.59 0.59 7.25 1 7.25H3.46L6.05 0.72C6.16 0.43 6.44 0.25 6.75 0.25H7.67C8.59 0.25 9.34 0.98 9.34 1.87V5.45H13.17C14 5.45 14.78 5.84 15.27 6.48C15.73 7.1 15.87 7.87 15.66 8.6L14.39 12.93C14.08 13.99 13.06 14.74 11.9 14.74L11.89 14.75ZM4.75 13.25H11.89C12.38 13.25 12.81 12.95 12.94 12.52L14.21 8.19C14.32 7.81 14.16 7.52 14.06 7.39C13.85 7.12 13.53 6.96 13.16 6.96H8.58C8.17 6.96 7.83 6.62 7.83 6.21V1.87C7.83 1.81 7.76 1.75 7.66 1.75H7.25L4.74 8.08V13.25H4.75ZM1.75 13.25H3.25V8.75H1.75V13.25V13.25Z"></path>
+                      </svg>
+                      <p>Yes</p>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M9.25533 14.75H8.33533C7.41533 14.75 6.66533 14.03 6.66533 13.13L6.66533 9.55H2.83533C2.00533 9.55 1.22533 9.16 0.735326 8.52C0.275326 7.9 0.135326 7.13 0.345326 6.4L1.62533 2.06C1.93533 1 2.95533 0.25 4.11533 0.25L15.0053 0.25C15.4153 0.25 15.7553 0.59 15.7553 1V7C15.7553 7.41 15.4153 7.75 15.0053 7.75H12.5453L9.95533 14.28C9.84533 14.57 9.56533 14.75 9.25533 14.75ZM4.11533 1.75C3.62533 1.75 3.19533 2.05 3.06533 2.48L1.79533 6.81C1.68533 7.19 1.84533 7.48 1.94533 7.61C2.15533 7.88 2.47533 8.04 2.84533 8.04H7.42533C7.83533 8.04 8.17533 8.38 8.17533 8.79L8.17533 13.12C8.17533 13.17 8.24533 13.24 8.34533 13.24H8.75533L11.2653 6.91V1.75L4.11533 1.75ZM12.7553 6.25H14.2553V1.75L12.7553 1.75V6.25Z"></path>
+                      </svg>
+                      <p>No</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
+          <CommentComponent jobDetail={jobDetail} />
         </div>
-        <div className="w-1/2 sticky top-0 z-10">
+        <div className="hidden lg:block w-1/2">
           <div className="w-full max-w-md mx-auto mt-10 border">
             {/* Tab Navigation */}
             <div className="flex border-b">

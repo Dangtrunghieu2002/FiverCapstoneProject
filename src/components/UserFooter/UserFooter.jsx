@@ -110,7 +110,7 @@ const UserFooter = () => {
             </svg>
             <p className="text-md text-gray-400 opacity-70 font-medium mt-2">© Fiverr International Ltd. 2024</p>
           </div>
-          <div className="flex item-center gap-10">
+          <div className="hidden sm:flex item-center gap-10">
             <div className="flex items-center gap-7">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

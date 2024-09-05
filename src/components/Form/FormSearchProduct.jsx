@@ -41,7 +41,7 @@ const FormSearchProduct = ({ setOpenDropDown, handleGetValueChildren }) => {
         <div className="flex pl-5 w-[350px] xl:w-[500px] 2xl:w-[600px] bg-white rounded-lg border border-gray-300 py-1">
           <input
             onChange={handleChange}
-            className="flex-1 focus:border-none focus:outline-none"
+            className="flex-1 outline-none"
             type="text"
             placeholder="Nhập tên công việc cần tìm kiếm"
           />
