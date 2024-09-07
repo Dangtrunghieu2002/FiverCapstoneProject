@@ -10,9 +10,12 @@ export const nguoiDungService = {
     createUser: (data) => {
         return http.post(`/users`,data)
     },
-    uploadAvatar: (data) => {
+    updateUser: (id,data) => {
+        return http.put(`/users/${id}`,data)
+    },
+    uploadAvatar: (data,token) => {
         return http.post("/users/upload-avatar",data,{
-            header: {
+            headers: {
                 token,
             }
         })

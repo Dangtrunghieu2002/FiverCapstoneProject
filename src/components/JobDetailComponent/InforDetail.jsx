@@ -1465,6 +1465,7 @@ const InforDetail = ({ jobDetail }) => {
               </div>
             </div>
             {comment?.map((item, index) => {
+              console.log(item)
               return (
                 <div className="mt-10">
                   <div className="border p-5 rounded-xl">
@@ -1477,7 +1478,7 @@ const InforDetail = ({ jobDetail }) => {
                         ) : (
                           <img
                             src={item.avatar}
-                            className="rounded-full"
+                            className="rounded-full w-[70px] h-[60px] object-cover"
                             alt=""
                           />
                         )}

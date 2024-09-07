@@ -38,7 +38,8 @@ const CommentComponent = ({ jobDetail, setComment, comment }) => {
         binhLuanService
           .themBinhLuan(values, getLocalStorage("user").token)
           .then((res) => {
-            setComment((comment) => [...comment, res.data.content]);
+            const cmt = {...res.data.content,avatar : getLocalStorage("user")?.user.avatar}
+            setComment((comment) => [...comment, cmt]);
             showNotification("Bạn thêm comment thành công!", "success");
           })
           .catch((err) => {

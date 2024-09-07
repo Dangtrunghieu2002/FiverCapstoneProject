@@ -4,8 +4,13 @@ import { skillService } from "../service/skill.service";
 export const getAllSkillApi = createAsyncThunk(
   "skill/getAllSkillApi",
   async (_, thunkAPI) => {
-    const reponse = await skillService.getAllSkill();
-    return reponse.data.content;
+    const reponse = await skillService
+      .getAllSkill()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    return "hung123";
   }
 );
 

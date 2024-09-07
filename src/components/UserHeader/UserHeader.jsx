@@ -127,9 +127,17 @@ const UserHeader = () => {
             overlayStyle={{ zIndex: 99999 }}
           >
             <div className="relative">
-              <Avatar className="cursor-pointer hover:bg-orange-500 duration-500 w-[35px] h-[35px] text-lg">
-                {inforUser.user.name.charAt(0)}
-              </Avatar>
+              {inforUser.user.avatar == "" ? (
+                <Avatar className="text-5xl cursor-pointer hover:bg-orange-500 duration-500 w-[120px] h-[120px]">
+                  {inforUser.user.name.charAt(0)}
+                </Avatar>
+              ) : (
+                <img
+                  src={inforUser.user.avatar}
+                  alt=""
+                  className="rounded-full w-[50px] h-[50px] object-cover"
+                />
+              )}
               <div className="w-[8px] h-[8px] rounded-full bg-[#1dbf73] absolute bottom-[2px] right-[2px] border border-[#eee]"></div>
             </div>
           </Dropdown>
@@ -284,8 +292,16 @@ const UserHeader = () => {
           <div className="header_logo flex items-center gap-4 lg:gap-8">
             <div className="lg:hidden text-2xl relative flex items-end justify-center">
               <button onClick={openModal} className="mt-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width={23} height={19} viewBox="0 0 23 19"><rect y={16} width={23} height={3} rx="1.5" fill="#555" /><rect width={23} height={3} rx="1.5" fill="#555" /><rect y={8} width={23} height={3} rx="1.5" fill="#555" /></svg>
-
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={23}
+                  height={19}
+                  viewBox="0 0 23 19"
+                >
+                  <rect y={16} width={23} height={3} rx="1.5" fill="#555" />
+                  <rect width={23} height={3} rx="1.5" fill="#555" />
+                  <rect y={8} width={23} height={3} rx="1.5" fill="#555" />
+                </svg>
               </button>
               <Modal isOpen={isModalOpen} onClose={closeModal} />
             </div>

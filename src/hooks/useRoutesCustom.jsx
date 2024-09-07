@@ -14,6 +14,8 @@ import JobDetailPage from "../pages/JobDetailPage/JobDetailPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import UserDetailPage from "../pages/UserDetailPage/UserDetailPage";
 import { getLocalStorage } from "../utils/util";
+import ContentDetail from "../components/UserDetailComponent/ContentDetail";
+import UpdateDetail from "../components/UserDetailComponent/UpdateDetail";
 
 const useRoutesCustom = () => {
   const routes = useRoutes([
@@ -39,7 +41,18 @@ const useRoutesCustom = () => {
         },
         {
           path : path.userDetail,
-          element: getLocalStorage("user") ? <UserDetailPage /> : <PageNotFound />
+          element: getLocalStorage("user") ? <UserDetailPage /> : <PageNotFound />,
+          children: [
+            {
+              index: true,
+              element : <ContentDetail />
+            },
+            {
+              path:path.updateDetail,
+              element: <UpdateDetail />
+            }
+            
+          ]
         }
       ],
     },

@@ -25,7 +25,7 @@ const Seeking = () => {
               </p>
               <p className="py-2 text-sm font-bold text-[#782020]">& more</p>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center lg:justify-start">
               <button className="lg:ml-0 mt-6 py-2 px-4 rounded-lg text-white font-semibold bg-black">
                 Browse agencles
               </button>
