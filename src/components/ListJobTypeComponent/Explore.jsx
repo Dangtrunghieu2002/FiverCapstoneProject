@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { path } from "../../common/path";
 const Explore = ({ jobType }) => {
-  console.log(jobType);
   return (
     <div className="container py-10 px-5 sm:px-5 xl:px-0">
       <h3 className="text-2xl font-bold">Explore {jobType?.tenLoaiCongViec}</h3>

@@ -37,46 +37,11 @@ import LogOutIcon from "../icon/LogOutIcon";
 import WrapperSuggestJob from "../Wrapper/WrapperSuggestJob";
 import FormSearchProduct from "../Form/FormSearchProduct";
 import Modal from "../Modal/Modal";
-const products = [
-  {
-    name: "Analytics",
-    description: "Get a better understanding of your traffic",
-    href: "#",
-    icon: ChartPieIcon,
-  },
-  {
-    name: "Engagement",
-    description: "Speak directly to your customers",
-    href: "#",
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: "Security",
-    description: "Your customers’ data will be safe and secure",
-    href: "#",
-    icon: FingerPrintIcon,
-  },
-  {
-    name: "Integrations",
-    description: "Connect with third-party tools",
-    href: "#",
-    icon: SquaresPlusIcon,
-  },
-  {
-    name: "Automations",
-    description: "Build strategic funnels that will convert",
-    href: "#",
-    icon: ArrowPathIcon,
-  },
-];
-const callsToAction = [
-  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-  { name: "Contact sales", href: "#", icon: PhoneIcon },
-];
+
 const items = [
   {
     label: (
-      <Link className="flex gap-2 items-center">
+      <Link to={path.userDetail} className="flex gap-2 items-center">
         <UserIcon color="black" />
         Thông tin cá nhân
       </Link>
@@ -86,6 +51,7 @@ const items = [
   {
     label: (
       <Link
+        to={"/"}
         className="flex gap-2 items-center"
         onClick={() => {
           localStorage.removeItem("user");
@@ -171,8 +137,8 @@ const UserHeader = () => {
       </>
     ) : (
       <>
-        <div className=" hidden lg:flex header_navigate gap-3 lg:gap-6 font-semibold text-lg justify-end items-center">
-          <h3 className="flex items-center gap-1 hover:bg-gray-100 rounded-md py-[7px] px-4">
+        <div className="flex header_navigate gap-10 xl:gap-6 font-semibold text-lg justify-end items-center">
+          <h3 className="hidden xl:flex items-center gap-1 hover:bg-gray-100 rounded-md py-[7px] px-4">
             Fiverr Pro
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +151,7 @@ const UserHeader = () => {
           <button
             id="dropdownDefaultButton"
             data-dropdown-toggle="dropdown1"
-            className="flex items-center gap-1 hover:bg-gray-100 rounded-md py-[7px] px-4"
+            className="hidden lg:flex  items-center gap-1 hover:bg-gray-100 rounded-md py-[7px] px-4"
             type="button"
           >
             Explore
@@ -294,7 +260,7 @@ const UserHeader = () => {
             </svg>
             English
           </div>
-          <h3 className="hover-green pr-2">Become a Seller</h3>
+          <h3 className="hidden 2xl:flex hover-green pr-2">Become a Seller</h3>
           <Link
             to={path.signIn}
             className=" rounded-md hover:text-green-500 duration-300 pr-2"
@@ -308,15 +274,6 @@ const UserHeader = () => {
             Join
           </Link>
         </div>
-        <div className="lg:hidden relative box-shadow bg-gray-100 flex items-center justify-center">
-          <button
-            onClick={openModal}
-            className="px-4 py-2 bg-blue-500 text-white rounded shadow"
-          >
-            Open Modal
-          </button>
-          <Modal isOpen={isModalOpen} onClose={closeModal} />
-        </div>
       </>
     );
   };
@@ -324,10 +281,19 @@ const UserHeader = () => {
     <header className="px-5 py-4 xl:px-0 border-b sticky top-0 bg-[#fff] z-[99]">
       <div className="container">
         <div className="header_content flex items-center justify-between space-x-5 min-w-full">
-          <div className="header_logo flex items-center gap-8">
-            <Link to={path.homePage}>
-              <LogoIcon />
-            </Link>
+          <div className="header_logo flex items-center gap-4 lg:gap-8">
+            <div className="lg:hidden text-2xl relative flex items-end justify-center">
+              <button onClick={openModal} className="mt-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width={23} height={19} viewBox="0 0 23 19"><rect y={16} width={23} height={3} rx="1.5" fill="#555" /><rect width={23} height={3} rx="1.5" fill="#555" /><rect y={8} width={23} height={3} rx="1.5" fill="#555" /></svg>
+
+              </button>
+              <Modal isOpen={isModalOpen} onClose={closeModal} />
+            </div>
+            <div>
+              <Link to={path.homePage}>
+                <LogoIcon />
+              </Link>
+            </div>
             <div className="hidden lg:flex">
               <WrapperSuggestJob>
                 <FormSearchProduct />

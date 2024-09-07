@@ -5,8 +5,7 @@ import { binhLuanService } from "../../service/binhLuan.service";
 import { useNavigate } from "react-router-dom";
 import { path } from "../../common/path";
 import { NotificationContext } from "../../../App";
-const CommentComponent = ({ jobDetail }) => {
-  const [comment, setComment] = useState(null);
+const CommentComponent = ({ jobDetail, setComment, comment }) => {
   const [initialValues, setInitialValues] = useState(null);
   const maCV = jobDetail?.congViec?.id;
   const { showNotification } = useContext(NotificationContext);
@@ -39,10 +38,14 @@ const CommentComponent = ({ jobDetail }) => {
         binhLuanService
           .themBinhLuan(values, getLocalStorage("user").token)
           .then((res) => {
+            setComment((comment) => [...comment, res.data.content]);
             showNotification("Bạn thêm comment thành công!", "success");
           })
           .catch((err) => {
-            showNotification("Comment không thành công vui lòng thử lại!", "error");
+            showNotification(
+              "Comment không thành công vui lòng thử lại!",
+              "error"
+            );
             console.log(err);
           });
       } else {

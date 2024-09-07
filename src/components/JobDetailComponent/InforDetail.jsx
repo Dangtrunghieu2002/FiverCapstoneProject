@@ -13,6 +13,7 @@ import { getLocalStorage } from "../../utils/util";
 import { useNavigate } from "react-router-dom";
 import { path } from "../../common/path";
 import { NotificationContext } from "../../../App";
+import { Avatar, Dropdown } from "antd";
 const InforDetail = ({ jobDetail }) => {
   const [i, setI] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -20,7 +21,6 @@ const InforDetail = ({ jobDetail }) => {
   const [comment, setComment] = useState([]);
   const navigate = useNavigate();
   const { showNotification } = useContext(NotificationContext);
-  console.log(jobDetail);
   const img = [
     jobDetail?.congViec.hinhAnh,
     `https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/95160836/original/c76e3bafcd31d8e9af171307c93ff18a36685208/diseno-logotipo-con-calidad-profesional.png`,
@@ -45,7 +45,6 @@ const InforDetail = ({ jobDetail }) => {
         .thueCongViec(data, getLocalStorage("user").token)
         .then((res) => {
           showNotification("Bạn đã thêm công việc thành công", "success");
-          console.log(res);
         })
         .catch((err) => {
           showNotification("Có lỗi xảy ra vui lòng thử lại", "error");
@@ -66,7 +65,6 @@ const InforDetail = ({ jobDetail }) => {
       .layBinhLuanTheoCongViec(jobDetail?.congViec.id)
       .then((res) => {
         setComment(res.data.content);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, [jobDetail]);
@@ -1467,21 +1465,28 @@ const InforDetail = ({ jobDetail }) => {
               </div>
             </div>
             {comment?.map((item, index) => {
-              console.log(item);
               return (
                 <div className="mt-10">
                   <div className="border p-5 rounded-xl">
                     <div className="flex items-center gap-5 border-b pb-5">
                       <div className="w-[60px] h-[60px]">
-                        <img
-                          src={item.avatar}
-                          className="rounded-full"
-                          alt=""
-                        />
+                        {item.avatar == "" ? (
+                          <Avatar className="cursor-pointer w-full h-full text-xl">
+                            {item.tenNguoiBinhLuan.charAt(0)}
+                          </Avatar>
+                        ) : (
+                          <img
+                            src={item.avatar}
+                            className="rounded-full"
+                            alt=""
+                          />
+                        )}
                       </div>
                       <div className="space-y-2">
                         <h3 className="font-bold text-lg">
-                          {item.tenNguoiBinhLuan}
+                          {item.tenNguoiBinhLuan == null
+                            ? getLocalStorage("user")?.user.name
+                            : item.tenNguoiBinhLuan}
                         </h3>
                         <div className="flex items-center gap-2">
                           <img
@@ -1579,7 +1584,11 @@ const InforDetail = ({ jobDetail }) => {
               );
             })}
           </div>
-          <CommentComponent jobDetail={jobDetail} />
+          <CommentComponent
+            jobDetail={jobDetail}
+            setComment={setComment}
+            comment={comment}
+          />
         </div>
         <div className="hidden lg:block w-1/2">
           <div className="w-full max-w-md mx-auto mt-10 border">

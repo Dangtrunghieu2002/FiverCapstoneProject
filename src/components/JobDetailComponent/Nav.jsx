@@ -1,7 +1,6 @@
 import React from "react";
 
 const Nav = ({ jobDetail }) => {
-  console.log(jobDetail);
   return (
     <div className="container py-10 px-5 sm:px-3 lg:px-0">
       <div className="block space-y-10 lg:space-y-0 lg:flex justify-between items-center">

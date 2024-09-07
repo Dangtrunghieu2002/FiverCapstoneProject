@@ -12,6 +12,8 @@ import IndexPage from "../pages/IndexPage/IndexPage";
 import ListJobType from "../pages/ListJobType/ListJobType";
 import JobDetailPage from "../pages/JobDetailPage/JobDetailPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import UserDetailPage from "../pages/UserDetailPage/UserDetailPage";
+import { getLocalStorage } from "../utils/util";
 
 const useRoutesCustom = () => {
   const routes = useRoutes([
@@ -34,6 +36,10 @@ const useRoutesCustom = () => {
         {
           path:path.jobDetail,
           element:<JobDetailPage />
+        },
+        {
+          path : path.userDetail,
+          element: getLocalStorage("user") ? <UserDetailPage /> : <PageNotFound />
         }
       ],
     },

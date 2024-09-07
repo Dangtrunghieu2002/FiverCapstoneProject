@@ -22,7 +22,7 @@ const UserNav = () => {
                 >
                   {item.tenLoaiCongViec}
                 </Link>
-                <div class="dropdown-menu origin-top-right absolute top-[47px] w-[400px] p-5 bg-white border border-gray-300 rounded-lg shadow-lg">
+                <div class="dropdown-menu origin-top-right absolute top-[47px] w-[400px] p-5 bg-white border border-gray-300 rounded-lg shadow-lg z-[999]">
                   <div class="py-1">
                     <div className="flex gap-10 items-start">
                       {item.dsNhomChiTietLoai.map((item, index) => {

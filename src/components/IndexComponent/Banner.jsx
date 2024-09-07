@@ -468,15 +468,15 @@ const Banner = () => {
           {listJobApi?.map((item, index) => {
             console.log(item.id);
             return (
-              <div className="flex items-start p-5 h-[129px] w-[129px] box-shadow rounded-2xl bg flex-col gap-5">
+              <Link
+                to={`${path.jobType}?MaLoaiCongViec=${item.id}`}
+                className="flex items-start p-5 h-[129px] w-[129px] box-shadow rounded-2xl bg flex-col gap-5"
+              >
                 <div className="">{icon[item.id]}</div>
-                <Link
-                  to={`${path.jobType}?MaLoaiCongViec=${item.id}`}
-                  className="text-sm font-semibold"
-                >
+                <div className="text-sm font-semibold">
                   {item.tenLoaiCongViec}
-                </Link>
-              </div>
+                </div>
+              </Link>
             );
           })}
           <div className="flex items-start p-5 h-[129px] w-[129px] box-shadow rounded-2xl bg flex-col gap-5">
