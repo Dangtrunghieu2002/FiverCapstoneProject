@@ -57,16 +57,16 @@ const ContentDetail = () => {
           return (
             <div
               to={`${path.jobDetail}?MaCongViec=${item.congViec.id}`}
-              className="flex gap-5 mt-10 border rounded-lg"
+              className="block md:flex gap-5 mt-10 border rounded-lg "
             >
-              <div className="w-[35%] flex justify-center items-center">
+              <div className="w-full md:w-[45%] lg:w-[35%] flex justify-center items-center">
                 <img
                   src={item.congViec.hinhAnh}
-                  className="rounded-lg h-full object-cover"
+                  className="rounded-lg h-full w-full object-cover"
                   alt=""
                 />
               </div>
-              <div className="w-[70%] py-3 px-4 space-y-4">
+              <div className="w-full mt-5 md:mt-0 md:w-[70%] py-3 px-4 space-y-4">
                 <div className="font-bold text-lg">
                   {item.congViec.tenCongViec}
                 </div>

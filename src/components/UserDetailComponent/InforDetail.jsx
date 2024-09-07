@@ -89,7 +89,7 @@ const InforDetail = () => {
         </div>
       </div>
 
-      <div className="py-7 border-b space-y-5">
+      <div className="hidden lg:block py-7 border-b space-y-5">
         <div className="flex items-center justify-between">
           <p className="font-bold">Description</p>
           <p className="    cursor-pointer hover:underline text-blue-500">

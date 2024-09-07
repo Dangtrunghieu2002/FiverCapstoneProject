@@ -1,25 +1,29 @@
-//Wrapper bọc lấy FormSearchProduct và làm tầng chức năng
-
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Dropdown } from "antd";
 import useDebounce from "../../hooks/useDebounce";
 import { congViecService } from "../../service/congViec.service";
 import { Link } from "react-router-dom";
+import { path } from "../../common/path";
+
 const WrapperSuggestJob = ({ children }) => {
   const [items, setItems] = useState([]);
   const [openDropDown, setOpenDropDown] = useState(false);
   const [value, setValue] = useState("");
   const debounceValue = useDebounce(value, 500);
+  const dropdownRef = useRef(null); // Tham chiếu đến dropdown
+
   const handleGetValueChildren = (valueChildren) => {
     setValue(valueChildren);
   };
+
   const clonedChildren = React.cloneElement(children, {
     setItems,
     setOpenDropDown,
     handleGetValueChildren,
   });
+
   useEffect(() => {
-    if(value){
+    if (value) {
       congViecService
         .layCongViecTheoTen(value)
         .then((res) => {
@@ -27,7 +31,10 @@ const WrapperSuggestJob = ({ children }) => {
             return {
               key: index.toString(),
               label: (
-                <Link className="flex items-center space-x-4">
+                <Link
+                  to={`${path.jobDetail}?MaCongViec=${item.congViec.id}`}
+                  className="flex items-center space-x-4"
+                >
                   <img src={item.congViec.hinhAnh} className="h-24" alt="" />
                   <div>
                     <h4>{item.congViec.tenCongViec}</h4>
@@ -39,7 +46,6 @@ const WrapperSuggestJob = ({ children }) => {
           });
           setOpenDropDown(true);
           setItems(items2);
-          console.log(items2);
         })
         .catch((err) => {
           console.log(err);
@@ -48,15 +54,19 @@ const WrapperSuggestJob = ({ children }) => {
     }
   }, [debounceValue]);
 
+
+
   return (
-    <Dropdown
-      menu={{
-        items,
-      }}
-      open={openDropDown}
-    >
-      {clonedChildren}
-    </Dropdown>
+    <div ref={dropdownRef}>
+      <Dropdown
+        menu={{
+          items,
+        }}
+        open={openDropDown}
+      >
+        {clonedChildren}
+      </Dropdown>
+    </div>
   );
 };
 
