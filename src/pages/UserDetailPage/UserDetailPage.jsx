@@ -2,7 +2,7 @@ import React from "react";
 import InforDetail from "../../components/UserDetailComponent/InforDetail";
 import ContentDetail from "../../components/UserDetailComponent/ContentDetail";
 import { Outlet } from "react-router-dom";
-import UserNav from "../../components/userNav/userNav";
+import UserNav from "../../components/UserNav/UserNav";
 const UserDetailPage = () => {
   return (
     <>

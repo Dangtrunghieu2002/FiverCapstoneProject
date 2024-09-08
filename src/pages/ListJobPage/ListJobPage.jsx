@@ -5,7 +5,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { congViecService } from "../../service/congViec.service";
 import { useSelector } from "react-redux";
 import { path } from "../../common/path";
-import UserNav from "../../components/userNav/userNav";
+import UserNav from "../../components/UserNav/UserNav";
 import { useLocation } from "react-router-dom";
 
 const ListJobPage = () => {

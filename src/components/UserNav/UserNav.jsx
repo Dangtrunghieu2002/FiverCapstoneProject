@@ -11,8 +11,9 @@ const UserNav = () => {
   const navigate = useNavigate();
   return (
     <div className="border-b h-[47px] px-5 sm:px-3 lg:px-0">
-      <div className="container flex justify-between gap-5">
-        {listJobApi.map((item, index) => {
+      <div className="container flex justify-between items-center gap-5">
+        {listJobApi?.slice(0,5).map((item, index) => {
+          console.log(item)
           return (
             <>
               <div class="relative inline-flex text-left dropdown">
