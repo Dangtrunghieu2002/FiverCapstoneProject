@@ -177,9 +177,12 @@ const ListJobPage = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-3">
           {listJob?.map((item, index) => {
-            console.log(item)
+            console.log(item);
             return (
-              <Link to={`${path.jobDetail}?MaCongViec=${item.congViec.id}`} className="inline-block">
+              <Link
+                to={`${path.jobDetail}?MaCongViec=${item.congViec.id}`}
+                className="inline-block relative"
+              >
                 <img
                   src={item.congViec.hinhAnh}
                   className="w-full max-h-[240px] object-cover rounded-xl"
