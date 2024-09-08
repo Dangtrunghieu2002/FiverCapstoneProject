@@ -59,7 +59,7 @@ const ContentDetail = () => {
               to={`${path.jobDetail}?MaCongViec=${item.congViec.id}`}
               className="block md:flex gap-5 mt-10 border rounded-lg "
             >
-              <div className="w-full md:w-[45%] lg:w-[35%] flex justify-center items-center">
+              <div className="w-full md:w-[45%] lg:w-[35%]  flex justify-center items-center">
                 <img
                   src={item.congViec.hinhAnh}
                   className="rounded-lg h-full w-full object-cover"

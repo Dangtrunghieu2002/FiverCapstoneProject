@@ -1,31 +1,5 @@
 // Header cho tất cả layout
 import { useState } from "react";
-import {
-  Dialog,
-  DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-} from "@headlessui/react";
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
-
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoIcon from "../icon/LogoIcon";
@@ -128,7 +102,7 @@ const UserHeader = () => {
           >
             <div className="relative">
               {inforUser.user.avatar == "" ? (
-                <Avatar className="text-5xl cursor-pointer hover:bg-orange-500 duration-500 w-[120px] h-[120px]">
+                <Avatar className="text-2xl cursor-pointer hover:bg-orange-500 duration-500 w-[40px] h-[40px]">
                   {inforUser.user.name.charAt(0)}
                 </Avatar>
               ) : (

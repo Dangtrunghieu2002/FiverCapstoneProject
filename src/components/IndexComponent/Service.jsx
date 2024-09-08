@@ -104,7 +104,7 @@ const Service = () => {
           </svg>
         </button>
         <button
-          className="absolute top-1/2 translate-y-5 translate-x-[25px] right-0 py-4 px-5 rounded-full box-shadow z-50 bg-[#FFFFFF]"
+          className="absolute top-1/2 translate-y-5 translate-x-[5px] md:translate-x-[15px] lg:translate-x-[25px] right-0 py-4 px-5 rounded-full box-shadow z-50 bg-[#FFFFFF]"
           onClick={() => scroll("right")}
         >
           <svg
