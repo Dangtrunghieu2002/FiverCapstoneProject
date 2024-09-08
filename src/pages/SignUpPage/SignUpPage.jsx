@@ -167,8 +167,8 @@ const SignUpPage = () => {
           Create Account
         </button>
         <h3>
-          Already have an account?{" "}
-          <Link className="underline text-blue-500">Sign In</Link>
+          Bạn đã có tài khoản?{" "}
+          <Link to={path.signIn} className="underline text-blue-500">Đăng nhập</Link>
         </h3>
       </form>
     </div>
