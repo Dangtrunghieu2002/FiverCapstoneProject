@@ -11,6 +11,7 @@ import { NotificationContext } from "../../../App";
 import { getInforUser } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import useResponsive from "../../hooks/useResponsive";
+import { path } from "../../common/path";
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -109,7 +110,7 @@ console.log(isResponsive)
                 >
                   Đăng nhập
                 </button>
-                <Link className="mt-5 inline-block">
+                <Link to={path.signUp} className="mt-5 inline-block">
                   Chưa có tài khoản?{" "}
                   <span className="text-blue-600 hover:underline">Đăng ký</span>
                 </Link>

@@ -78,7 +78,7 @@ const ListJobPage = () => {
           <span className="font-bold">
             {seachParam.get("tenCongViec")
               ? seachParam.get("tenCongViec")
-              : "List job"}
+              : listJob[0]?.tenChiTietLoai}
           </span>
         </h1>
         <div className="block lg:flex space-y-10 lg:space-y-0 gap-10 justify-between items-end">

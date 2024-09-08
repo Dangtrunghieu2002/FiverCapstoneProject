@@ -432,7 +432,7 @@ const InforDetail = ({ jobDetail }) => {
   return (
     <div className="container w-full">
       <div className="block lg:flex gap-20 justify-between">
-        <div className="w-full lg:w-2/3">
+        <div className="w-full xl:w-2/3">
           <h3 className="text-3xl font-bold">
             {jobDetail?.congViec.tenCongViec}
           </h3>
@@ -586,7 +586,17 @@ const InforDetail = ({ jobDetail }) => {
               </div>
             </div>
           </div>
-          <div className="mt-20 flex items-center justify-between">
+          <div className="mt-10">
+          <button
+              onClick={() => {
+                handleHired(data);
+              }}
+              className="block xl:hidden  w-1/2  sm:w-[20%] py-2 px-5 bg-black text-white mt-10 rounded-lg font-medium hover:opacity-60"
+            >
+              Continute
+            </button>
+          </div>
+          <div className="mt-10 flex items-center justify-between">
             <h3 className="text-xl font-semibold">
               What people loved about this freelancer
             </h3>
@@ -1591,7 +1601,7 @@ const InforDetail = ({ jobDetail }) => {
             comment={comment}
           />
         </div>
-        <div className="hidden lg:block w-1/2">
+        <div className="hidden xl:block w-1/2">
           <div className="w-full max-w-md mx-auto mt-10 border">
             {/* Tab Navigation */}
             <div className="flex border-b">

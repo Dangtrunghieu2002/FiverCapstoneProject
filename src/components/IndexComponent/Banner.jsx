@@ -339,7 +339,7 @@ const Banner = () => {
     <div className="container py-10 px-5 sm:px-5 xl:px-0">
       <div className="bg-[url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/84c449beda884aa8f9f72023e2d8b3fd-1705308514872/hero-lg-x1.png')]  h-[300px] md:h-[468px] lg:h-[560px] w-full bg-cover bg-center rounded-3xl flex flex-col items-center ">
         <div className="flex justify-center items-center flex-col h-full">
-          <h3 className="text-white text-[30px] lg:text-[45px] xl:text-[60px] font-semibold text-center">
+          <h3 className="text-white text-[30px] lg:text-[45px] xl:text-[60px] font-medium text-center">
             Scale your professional <br /> workforce with{" "}
             <span className="font font-thin">freelancers</span>
           </h3>
