@@ -9,6 +9,156 @@ const Banner = ({ jobType }) => {
     4: `bg-[url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/c5be9e1ff7a9c16910688aa6b7b5ffee-1688626700100/V_A-%20Desktop%20banner.png')]`,
     5: `bg-[url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/509f310d48d17eafe768a87f78d10af8-1688626492933/M_A-%20Desktop%20banner.png')]`,
   };
+  const miniInfor = {
+    2: [
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/db18b6c9ba3af4778a5796b9e94137d7-1626177278710/SEO_2x.png`,
+        desc: `Seo`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/db18b6c9ba3af4778a5796b9e94137d7-1626177278701/Social%20Media%20Marketing_2x.png`,
+        desc: `Social Media Marketing `,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/db18b6c9ba3af4778a5796b9e94137d7-1626177278703/Video%20Marketing_2x.png`,
+        desc: `Video Marketing`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/db18b6c9ba3af4778a5796b9e94137d7-1626177278707/E-Commerce%20Marketing_2x.png`,
+        desc: `E-Commerce Marketing`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/db18b6c9ba3af4778a5796b9e94137d7-1626177278716/SEM_2x.png`,
+        desc: `SEM`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/db18b6c9ba3af4778a5796b9e94137d7-1626177278711/Email%20Marketing_2x.png`,
+        desc: `Email Marketing`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/db18b6c9ba3af4778a5796b9e94137d7-1626177278721/Music%20Promotion_2x.png`,
+        desc: `Music Promotion`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/db18b6c9ba3af4778a5796b9e94137d7-1626177278720/Social%20Media%20Advertising_2x.png`,
+        desc: `Paid Social Media`,
+      },
+    ],
+    3: [
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/e72f248973b8a6b99a5786e63b6a3b1c-1630333285644/Articles%20_%20Blog%20Posts.png`,
+        desc: `Articles & Blog Posts`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/e72f248973b8a6b99a5786e63b6a3b1c-1630333285630/Translation.png`,
+        desc: `Translation`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/e72f248973b8a6b99a5786e63b6a3b1c-1630333285651/Ghostwriting.png`,
+        desc: `Ghostwriting`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/e72f248973b8a6b99a5786e63b6a3b1c-1630333285643/Proofreading%20_%20Editing.png`,
+        desc: `Proofreading & Editing`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/e72f248973b8a6b99a5786e63b6a3b1c-1630333285646/Resume%20Writing.png`,
+        desc: `Resume Writing`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/e72f248973b8a6b99a5786e63b6a3b1c-1630333285650/Website%20Content.png`,
+        desc: `Website Content`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/e72f248973b8a6b99a5786e63b6a3b1c-1630333285639/Product%20Descriptions.png`,
+        desc: `Product Descriptions`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/e72f248973b8a6b99a5786e63b6a3b1c-1630333285629/Scriptwriting.png`,
+        desc: `Scriptwriting`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/e72f248973b8a6b99a5786e63b6a3b1c-1630333285638/Book%20Editing.png`,
+        desc: `Book Editing`,
+      },
+    ],
+    4: [
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/89ab9ac515a075a49a33b72518218e69-1630332670390/Video%20Editing.png`,
+        desc: `Video Editing`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/89ab9ac515a075a49a33b72518218e69-1630332670370/Short%20Video%20Ads.png`,
+        desc: `Video Ads & Commercials`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/4e99f7989f6e3ea9fc115fc017051455-1630332866288/Whiteboard%20_%20Animated%20Explainers.png`,
+        desc: `Animated Explainers`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/89ab9ac515a075a49a33b72518218e69-1630332670382/Character%20Animation.png`,
+        desc: `Character Animation`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/9d0390ca87e4f946f4b4126d5cd15332-1653292063612/Social%20Media%20Videos%20icon%29.png`,
+        desc: `Social Media Videos`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/fa31de2cd7a541ba5fd2020e391b844f-1682323856747/ai%20atrists.png`,
+        desc: `AI Music Videos`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/89ab9ac515a075a49a33b72518218e69-1630332670372/Logo%20Animation.png`,
+        desc: `Logo Animation`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/89ab9ac515a075a49a33b72518218e69-1630332670391/Visual%20Effects.png`,
+        desc: `Visual Effects`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/89ab9ac515a075a49a33b72518218e69-1630332670388/3D%20Product%20Animation.png`,
+        desc: `3D Product Animation`,
+      },
+    ],
+    5: [
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/849e7cac6e16783b5dc3ab006b128c00-1626181323563/Voice%20Over_2x.png`,
+        desc: `Voice Over`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/849e7cac6e16783b5dc3ab006b128c00-1626181323574/Producers_Composers_2x.png`,
+        desc: `Music Producers`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/849e7cac6e16783b5dc3ab006b128c00-1626181323569/Singers_Vocalists_2x.png`,
+        desc: `Singers & Vocalists`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/849e7cac6e16783b5dc3ab006b128c00-1626181323569/Mixing_Mastering_2x.png`,
+        desc: `Mixing & Mastering`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/849e7cac6e16783b5dc3ab006b128c00-1626181323556/Session%20Musicians_2x.png`,
+        desc: `Session Musicians`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/849e7cac6e16783b5dc3ab006b128c00-1626181323560/Songwriters_2x.png`,
+        desc: `Songwriters`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/849e7cac6e16783b5dc3ab006b128c00-1626181323553/Podcast%20Editing_2x.png`,
+        desc: `Podcast Production`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/849e7cac6e16783b5dc3ab006b128c00-1626181323551/Beats%20%28Beat%20Making%29_2x.png`,
+        desc: `Beat Making`,
+      },
+      {
+        img: `https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/849e7cac6e16783b5dc3ab006b128c00-1626181323558/Sound%20Design_2x.png`,
+        desc: `Sound Design`,
+      },
+    ],
+  };
   const scroll = (direction) => {
     if (scrollRef.current) {
       // Lấy kích thước của phần tử chứa và số lượng phần tử muốn cuộn qua
@@ -25,7 +175,9 @@ const Banner = ({ jobType }) => {
   return (
     <div className="container py-10 px-5 sm:px-3 lg:px-0">
       <div
-        className={`${bannerImg[jobType?.id]} h-[170px] md:h-[200px] lg:h-[250px] w-full bg-cover bg-center rounded-xl flex flex-col items-center justify-center `}
+        className={`${
+          bannerImg[jobType?.id]
+        } h-[170px] md:h-[200px] lg:h-[250px] w-full bg-cover bg-center rounded-xl flex flex-col items-center justify-center `}
       >
         <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white">
           {jobType?.tenLoaiCongViec}
@@ -58,184 +210,210 @@ const Banner = ({ jobType }) => {
       <div className="relative">
         <div
           ref={scrollRef}
-          className="overflow-scroll mt-5 py-1 scrollbar-hide"
+          className="overflow-scroll mt-5 py-1 px-1 scrollbar-hide"
         >
           <div className="flex gap-4 w-[2460px]">
-            <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
-              <img
-                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101614/Logo%20design_2x.png"
-                alt=""
-                className="w-[48px] h-[48px]"
-              />
-              <div className="flex items-center gap-3">
-                <h3 className="text-[16px] font-semibold">
-                  Minimalist Logo Design
-                </h3>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
+            {jobType?.id !== 1 ? (
+              miniInfor[jobType?.id]?.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden"
                 >
-                  <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
-              <img
-                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101633/Illustration_2x.png"
-                alt=""
-                className="w-[48px] h-[48px]"
-              />
-              <div className="flex items-center gap-3">
-                <h3 className="text-[16px] font-semibold">IIIustration</h3>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
-              <img
-                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/55b9d6349057bb9fe177ea57e2d92f30-1670570507381/Web%20Design.png"
-                alt=""
-                className="w-[48px] h-[48px]"
-              />
-              <div className="flex items-center gap-3">
-                <h3 className="text-[16px] font-semibold">Website Design</h3>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
-              <img
-                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101618/Architecture%20_%20Interior%20Design_2x.png"
-                alt=""
-                className="w-[48px] h-[48px]"
-              />
-              <div className="flex items-center gap-3">
-                <h3 className="text-[16px] font-semibold">
-                  Architecture & Interior Design
-                </h3>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
-              <img
-                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/ace985608fce227eb6477959645d09ed-1680446271839/ai%20atrists.png"
-                alt=""
-                className="w-[48px] h-[48px]"
-              />
-              <div className="flex items-center gap-3">
-                <h3 className="text-[16px] font-semibold">AI Artists</h3>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
-              <img
-                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101624/Photoshop%20Editing_2x.png"
-                alt=""
-                className="w-[48px] h-[48px]"
-              />
-              <div className="flex items-center gap-3">
-                <h3 className="text-[16px] font-semibold">Editing</h3>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
-              <img
-                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101623/T-Shirts%20_%20Merchandise_2x.png"
-                alt=""
-                className="w-[48px] h-[48px]"
-              />
-              <div className="flex items-center gap-3">
-                <h3 className="text-[16px] font-semibold">
-                  T-Shirts & Merchandise
-                </h3>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
-              <img
-                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/5987755afeb2d9ea01871fdee90a9a05-1670570470543/Product%20_%20industrial%20design.png"
-                alt=""
-                className="w-[48px] h-[48px]"
-              />
-              <div className="flex items-center gap-3">
-                <h3 className="text-[16px] font-semibold">
-                  Industrial & Product Design
-                </h3>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
-              <img
-                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101621/Social%20Media%20Design_2x.png"
-                alt=""
-                className="w-[48px] h-[48px]"
-              />
-              <div className="flex items-center gap-3">
-                <h3 className="text-[16px] font-semibold">
-                  Social Media Design
-                </h3>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
-                </svg>
-              </div>
-            </div>
+                  <img src={item.img} alt="" className="w-[48px] h-[48px]" />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[15px] font-semibold">{item.desc}</h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <>
+                <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
+                  <img
+                    src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101614/Logo%20design_2x.png"
+                    alt=""
+                    className="w-[48px] h-[48px]"
+                  />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[16px] font-semibold">
+                      Minimalist Logo Design
+                    </h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
+                  <img
+                    src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101633/Illustration_2x.png"
+                    alt=""
+                    className="w-[48px] h-[48px]"
+                  />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[16px] font-semibold">IIIustration</h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
+                  <img
+                    src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/55b9d6349057bb9fe177ea57e2d92f30-1670570507381/Web%20Design.png"
+                    alt=""
+                    className="w-[48px] h-[48px]"
+                  />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[16px] font-semibold">
+                      Website Design
+                    </h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
+                  <img
+                    src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101618/Architecture%20_%20Interior%20Design_2x.png"
+                    alt=""
+                    className="w-[48px] h-[48px]"
+                  />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[16px] font-semibold">
+                      Architecture & Interior Design
+                    </h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
+                  <img
+                    src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/ace985608fce227eb6477959645d09ed-1680446271839/ai%20atrists.png"
+                    alt=""
+                    className="w-[48px] h-[48px]"
+                  />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[16px] font-semibold">AI Artists</h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
+                  <img
+                    src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101624/Photoshop%20Editing_2x.png"
+                    alt=""
+                    className="w-[48px] h-[48px]"
+                  />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[16px] font-semibold">Editing</h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
+                  <img
+                    src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101623/T-Shirts%20_%20Merchandise_2x.png"
+                    alt=""
+                    className="w-[48px] h-[48px]"
+                  />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[16px] font-semibold">
+                      T-Shirts & Merchandise
+                    </h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
+                  <img
+                    src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/5987755afeb2d9ea01871fdee90a9a05-1670570470543/Product%20_%20industrial%20design.png"
+                    alt=""
+                    className="w-[48px] h-[48px]"
+                  />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[16px] font-semibold">
+                      Industrial & Product Design
+                    </h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex gap-3 items-center p-[14px] box-shadow rounded-xl hover:text-green-500 overflow-hidden">
+                  <img
+                    src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101621/Social%20Media%20Design_2x.png"
+                    alt=""
+                    className="w-[48px] h-[48px]"
+                  />
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-[16px] font-semibold">
+                      Social Media Design
+                    </h3>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.92332 2.96885C9.63854 2.66807 9.1768 2.66807 8.89202 2.96885C8.60723 3.26963 8.60723 3.75729 8.89202 4.05807L11.6958 7.01931H1.48616C1.08341 7.01931 0.756918 7.36413 0.756918 7.7895C0.756918 8.21487 1.08341 8.5597 1.48616 8.5597H11.8436L8.89202 11.677C8.60723 11.9778 8.60723 12.4654 8.89202 12.7662C9.1768 13.067 9.63854 13.067 9.92332 12.7662L14.0459 8.41213C14.3307 8.11135 14.3307 7.62369 14.0459 7.32291L13.977 7.25011C13.9737 7.24661 13.9704 7.24315 13.9671 7.23972L9.92332 2.96885Z"></path>
+                    </svg>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           <button
-            className="absolute top-[-70px] right-[30px] sm:right-[80px] translate-y-5 translate-x-[-25px] transform  py-2 px-3 rounded-full box-shadow z-50 bg-[#FFFFFF]"
+            className="absolute top-[-70px] right-[30px] translate-y-5 translate-x-[-25px] transform  py-2 px-3 rounded-full box-shadow z-50 bg-[#FFFFFF]"
             onClick={() => scroll("left")}
           >
             <svg
@@ -248,7 +426,7 @@ const Banner = ({ jobType }) => {
             </svg>
           </button>
           <button
-            className="absolute top-[-70px] right-[40px] sm:right-[80px]  translate-y-5 translate-x-[25px] py-2 px-3 rounded-full box-shadow z-50 bg-[#FFFFFF]"
+            className="absolute top-[-70px] right-[40px] translate-y-5 translate-x-[25px] py-2 px-3 rounded-full box-shadow z-50 bg-[#FFFFFF]"
             onClick={() => scroll("right")}
           >
             <svg
