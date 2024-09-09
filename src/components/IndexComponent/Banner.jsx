@@ -465,7 +465,6 @@ const Banner = () => {
       <div className="mt-10">
         <div className="flex items-center justify-between flex-wrap gap-5 xl:gap-0">
           {listJobApi?.slice(0,5).map((item, index) => {
-            console.log(item)
             return (
               <Link
                 to={`${path.jobType}?MaLoaiCongViec=${item.id}`}

@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const NotificationContext = React.createContext();
 function App() {
   const routes = useRoutesCustom();
-  const showNotification = (content, type, duration = 4000) => {
+  const showNotification = (content, type, duration = 1000) => {
     toast[type](content, {
       position: "top-right",
       zIndex: 999999,

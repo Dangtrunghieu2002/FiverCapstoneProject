@@ -14,6 +14,9 @@ import { useNavigate } from "react-router-dom";
 import { path } from "../../common/path";
 import { NotificationContext } from "../../../App";
 import { Avatar, Dropdown } from "antd";
+import { useDispatch } from "react-redux";
+import { congViecService } from "../../service/congViec.service";
+import {addJob} from "../../redux/thueCongViecSlice"
 const InforDetail = ({ jobDetail }) => {
   const [i, setI] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -31,7 +34,7 @@ const InforDetail = ({ jobDetail }) => {
     `https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/b8105c4a4200210795aa92a08b3df645-1725144377/VIO%20CAKE.2-01/diseno-logotipo-con-calidad-profesional.png`,
     `https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs2/115633468/original/2f1b8dbc9f572114546848a8e37ce75fd1f80bfa/design-a-modern-wordpress-business-website-or-blog.jpg`,
   ];
-
+  const dispatch = useDispatch();
   const data = {
     id: 0,
     maCongViec: jobDetail?.congViec.id,
@@ -43,7 +46,21 @@ const InforDetail = ({ jobDetail }) => {
     if (getLocalStorage("user")?.token) {
       thueCongViec
         .thueCongViec(data, getLocalStorage("user").token)
-        .then((res) => {
+        .then((res1) => {
+          console.log(res1)
+          if (res1.data.content) {
+            congViecService
+              .layCongViecTheoMaCongViec(res1.data.content.maCongViec)
+              .then((res) => {
+                // console.log(res.data.content[0].congViec);
+                let a = {
+                  id:res1.data.content.id,
+                  congViec:res.data.content[0].congViec
+                }
+                dispatch(addJob(a));
+              })
+              .catch((err) => console.log(err));
+          }
           showNotification("Bạn đã thêm công việc thành công", "success");
         })
         .catch((err) => {
@@ -587,7 +604,7 @@ const InforDetail = ({ jobDetail }) => {
             </div>
           </div>
           <div className="mt-10">
-          <button
+            <button
               onClick={() => {
                 handleHired(data);
               }}
@@ -1475,7 +1492,7 @@ const InforDetail = ({ jobDetail }) => {
               </div>
             </div>
             {comment?.map((item, index) => {
-              console.log(item)
+              console.log(item);
               return (
                 <div className="mt-10">
                   <div className="border p-5 rounded-xl">

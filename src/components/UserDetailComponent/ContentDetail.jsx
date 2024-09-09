@@ -3,10 +3,14 @@ import { thueCongViec } from "../../service/thueCongViec.service";
 import { getLocalStorage } from "../../utils/util";
 import { Link } from "react-router-dom";
 import { path } from "../../common/path";
+import { useDispatch } from "react-redux";
+import { removeJob } from "../../redux/thueCongViecSlice";
 const ContentDetail = () => {
   const [danhSachCV, setDanhSachCV] = useState([]);
+  const dispatch = useDispatch();
   console.log(danhSachCV);
   const handleDeleteJob = (id) => {
+    dispatch(removeJob(id));
     thueCongViec
       .xoaCongViecDaThue(id, getLocalStorage("user")?.token)
       .then((res) => {

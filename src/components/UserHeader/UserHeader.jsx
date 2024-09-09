@@ -1,16 +1,19 @@
 // Header cho tất cả layout
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoIcon from "../icon/LogoIcon";
 import { path } from "../../common/path";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Avatar, Dropdown } from "antd";
 import UserIcon from "../icon/UserIcon";
 import LogOutIcon from "../icon/LogOutIcon";
 import WrapperSuggestJob from "../Wrapper/WrapperSuggestJob";
 import FormSearchProduct from "../Form/FormSearchProduct";
 import Modal from "../Modal/Modal";
+import { thueCongViec } from "../../service/thueCongViec.service";
+import { getLocalStorage } from "../../utils/util";
+import { layDanhSachCongViec } from "../../redux/thueCongViecSlice";
 
 const items = [
   {
@@ -45,39 +48,30 @@ const UserHeader = () => {
   const closeModal = () => setIsModalOpen(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const { inforUser } = useSelector((state) => state.authSlice);
+  const dispatch = useDispatch();
+  const { data, count } = useSelector((state) => state.thueCongViecSlice);
+  console.log(count);
+  console.log(data);
   const inforUser2 = localStorage.getItem("user");
-  const items2 = [
-    {
-      key: '1',
+  useEffect(() => {
+    dispatch(layDanhSachCongViec());
+  }, [dispatch]);
+  const items2 = data?.map((item, index) => {
+    return {
+      key: index,
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-          1st menu item
-        </a>
+        <Link to={path.userDetail} className="flex items-center gap-5" key={index}>
+          <div className="w-[80px]">
+            <img src={item?.congViec.hinhAnh} alt="" className="w-full" />
+          </div>
+          <div>
+            <p className="font-bold">{item.congViec.tenCongViec}</p>
+          </div>
+        </Link>
       ),
-    },
-    {
-      key: '2',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          2nd menu item (disabled)
-        </a>
-      ),
-    },
-    {
-      key: '3',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-          3rd menu item (disabled)
-        </a>
-      ),
-      disabled: true,
-    },
-    {
-      key: '4',
-      danger: true,
-      label: 'a danger item',
-    },
-  ];
+    };
+  });
+
   const checkUserLogin = () => {
     return inforUser2 ? (
       <>
@@ -94,26 +88,39 @@ const UserHeader = () => {
                 <path d="M3.494 6.818a6.506 6.506 0 0 1 13.012 0v2.006c0 .504.2.988.557 1.345l1.492 1.492a3.869 3.869 0 0 1 1.133 2.735 2.11 2.11 0 0 1-2.11 2.11H2.422a2.11 2.11 0 0 1-2.11-2.11c0-1.026.408-2.01 1.134-2.735l1.491-1.492c.357-.357.557-.84.557-1.345V6.818Zm-1.307 7.578c0 .13.106.235.235.235h15.156c.13 0 .235-.105.235-.235 0-.529-.21-1.036-.584-1.41l-1.492-1.491a3.778 3.778 0 0 1-1.106-2.671V6.818a4.63 4.63 0 1 0-9.262 0v2.006a3.778 3.778 0 0 1-1.106 2.671L2.77 12.987c-.373.373-.583.88-.583 1.41Zm4.49 4.354c0-.517.419-.937.937-.937h4.772a.938.938 0 0 1 0 1.875H7.614a.937.937 0 0 1-.938-.938Z"></path>
               </svg>
             </div>
-            <div className="p-3 rounded-full hover:bg-gray-100">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 18 16"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentFill"
+            <div className="relative inline-flex items-center p-3 rounded-full hover:bg-gray-100">
+              <Dropdown
+                menu={{ items: items2 }}
+                overlayStyle={{ zIndex: 99999 }}
+                trigger={["click"]}
               >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M.838 4.647a.75.75 0 0 1 1.015-.309L9 8.15l7.147-3.812a.75.75 0 0 1 .706 1.324l-7.5 4a.75.75 0 0 1-.706 0l-7.5-4a.75.75 0 0 1-.309-1.015Z"
-                ></path>
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M2.5 2.25a.25.25 0 0 0-.25.25v11c0 .138.112.25.25.25h13a.25.25 0 0 0 .25-.25v-11a.25.25 0 0 0-.25-.25h-13ZM.75 2.5c0-.966.784-1.75 1.75-1.75h13c.966 0 1.75.784 1.75 1.75v11a1.75 1.75 0 0 1-1.75 1.75h-13A1.75 1.75 0 0 1 .75 13.5v-11Z"
-                ></path>
-              </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 18 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  className="text-gray-800"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M.838 4.647a.75.75 0 0 1 1.015-.309L9 8.15l7.147-3.812a.75.75 0 0 1 .706 1.324l-7.5 4a.75.75 0 0 1-.706 0l-7.5-4a.75.75 0 0 1-.309-1.015Z"
+                  ></path>
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M2.5 2.25a.25.25 0 0 0-.25.25v11c0 .138.112.25.25.25h13a.25.25 0 0 0 .25-.25v-11a.25.25 0 0 0-.25-.25h-13ZM.75 2.5c0-.966.784-1.75 1.75-1.75h13c.966 0 1.75.784 1.75 1.75v11a1.75 1.75 0 0 1-1.75 1.75h-13A1.75 1.75 0 0 1 .75 13.5v-11Z"
+                  ></path>
+                </svg>
+              </Dropdown>
+              {count > 0 && (
+                <span className="absolute top-[10px] right-[-5px] -translate-x-1/2 -translate-y-1/2 w-[16px] h-[16px] flex items-center justify-center rounded-full bg-red-700 text-white text-xs font-semibold">
+                  {count}
+                </span>
+              )}
             </div>
+
             <div className="p-3 rounded-full hover:bg-gray-100">
               <svg
                 width="20"
