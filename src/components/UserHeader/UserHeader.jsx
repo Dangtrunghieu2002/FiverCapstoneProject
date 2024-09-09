@@ -50,8 +50,6 @@ const UserHeader = () => {
   const { inforUser } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
   const { data, count } = useSelector((state) => state.thueCongViecSlice);
-  console.log(count);
-  console.log(data);
   const inforUser2 = localStorage.getItem("user");
   useEffect(() => {
     dispatch(layDanhSachCongViec());

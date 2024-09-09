@@ -8,7 +8,6 @@ import { removeJob } from "../../redux/thueCongViecSlice";
 const ContentDetail = () => {
   const [danhSachCV, setDanhSachCV] = useState([]);
   const dispatch = useDispatch();
-  console.log(danhSachCV);
   const handleDeleteJob = (id) => {
     dispatch(removeJob(id));
     thueCongViec

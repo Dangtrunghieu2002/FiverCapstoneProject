@@ -41,7 +41,6 @@ const UpdateDetail = () => {
       avatar: {},
     },
     onSubmit: (values) => {
-      console.log(values);
       const { avatar, ...formData } = values;
       const dataForm = new FormData();
       dataForm.append("formFile", avatar.file);
@@ -49,7 +48,6 @@ const UpdateDetail = () => {
       nguoiDungService
         .uploadAvatar(dataForm, token)
         .then((res) => {
-          console.log("anh", res);
         })
         .catch((err) => {
           console.log(err);
@@ -74,7 +72,6 @@ const UpdateDetail = () => {
 
   const handleDateChange = (date) => {
     const formattedDate = date ? date.format("DD-MM-YYYY") : ""; // Chuyển đổi thành chuỗi với định dạng mong muốn
-    console.log(123);
     setFieldValue("birthday", formattedDate); // Cập nhật giá trị của trường birthday
   };
   return (

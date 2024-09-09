@@ -47,7 +47,6 @@ const InforDetail = ({ jobDetail }) => {
       thueCongViec
         .thueCongViec(data, getLocalStorage("user").token)
         .then((res1) => {
-          console.log(res1)
           if (res1.data.content) {
             congViecService
               .layCongViecTheoMaCongViec(res1.data.content.maCongViec)
@@ -1492,7 +1491,6 @@ const InforDetail = ({ jobDetail }) => {
               </div>
             </div>
             {comment?.map((item, index) => {
-              console.log(item);
               return (
                 <div className="mt-10">
                   <div className="border p-5 rounded-xl">

@@ -9,14 +9,14 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import ListJobPage from "../pages/ListJobPage/ListJobPage";
 import { Skeleton } from "antd";
 import IndexPage from "../pages/IndexPage/IndexPage";
-import ListJobType from "../pages/ListJobType/ListJobType";
+// import ListJobType from "../pages/ListJobType/ListJobType";
 import JobDetailPage from "../pages/JobDetailPage/JobDetailPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import UserDetailPage from "../pages/UserDetailPage/UserDetailPage";
 import { getLocalStorage } from "../utils/util";
 import ContentDetail from "../components/UserDetailComponent/ContentDetail";
 import UpdateDetail from "../components/UserDetailComponent/UpdateDetail";
-
+const ListJobType = React.lazy(() => import ('../pages/ListJobType/ListJobType'))
 const useRoutesCustom = () => {
   const routes = useRoutes([
     {
@@ -33,7 +33,7 @@ const useRoutesCustom = () => {
         },
         {
           path: path.jobType,
-          element: <ListJobType />
+          element: <Suspense fallback={<div>Loading...</div>}><ListJobType /></Suspense>
         },
         {
           path:path.jobDetail,
