@@ -14,3 +14,5 @@ Cac thu vien dang su dung trong du an:
 - Antd
 - Sass
 >>>>>>> 256f72f (setup react template)
+>>>>>>> 
+![Capture](https://github.com/user-attachments/assets/2b859ca5-68d2-467c-a6de-d81b560d072f)
