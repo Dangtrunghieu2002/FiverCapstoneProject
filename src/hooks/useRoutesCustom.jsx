@@ -9,21 +9,58 @@ import JobManagePage from "../pages/JobManagePage/JobManagePage";
 import JobTypeManagePage from "../pages/JobTypeManagePage/JobTypeManagePage";
 import ServiceManagePage from "../pages/ServiceManagePage/ServiceManagePage";
 import UserManagePage from "../pages/UserManagePage/UserManagePage";
-
+import JobDetailPage from "../pages/JobDetailPage/JobDetailPage";
+import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import UserDetailPage from "../pages/UserDetailPage/UserDetailPage";
+import { getLocalStorage } from "../utils/util";
+import ContentDetail from "../components/UserDetailComponent/ContentDetail";
+import UpdateDetail from "../components/UserDetailComponent/UpdateDetail";
+import ListJobPage from "../pages/ListJobPage/ListJobPage";
+import ListJobType from "../pages/ListJobType/ListJobType";
+import { path } from "../common/path";
 // Define lazy-loaded components if needed
-const JobDetailPage = lazy(() => import("../pages/JobDetailPage/JobDetailPage"));
-const UserDetailPage = lazy(() => import("../pages/UserDetailPage/UserDetailPage"));
+
 
 const useRoutesCustom = () => {
   return useRoutes([
     {
-      path: "/",
-      element: <UserTemplate />, // User layout
+      path: path.homePage,
+      element: <UserTemplate />,
       children: [
-        { index: true, element: <IndexPage /> },
-        { path: "login", element: <LoginPage /> },
-        { path: "user-details", element: <Suspense fallback={<div>Loading...</div>}><UserDetailPage /></Suspense> },
-        { path: "*", element: <PageNotFound /> },
+        {
+          index: true,
+          element: <IndexPage />,
+        },
+        {
+          path: path.listJob,
+          element: <ListJobPage />,
+        },
+        {
+          path: path.jobType,
+          element: <ListJobType />,
+        },
+        {
+          path: path.jobDetail,
+          element: <JobDetailPage />,
+        },
+        {
+          path: path.userDetail,
+          element: getLocalStorage("user") ? (
+            <UserDetailPage />
+          ) : (
+            <PageNotFound />
+          ),
+          children: [
+            {
+              index: true,
+              element: <ContentDetail />,
+            },
+            {
+              path: path.updateDetail,
+              element: <UpdateDetail />,
+            },
+          ],
+        },
       ],
     },
     {
@@ -37,7 +74,15 @@ const useRoutesCustom = () => {
         { path: "*", element: <PageNotFound /> },
       ],
     },
-    { path: "*", element: <PageNotFound /> }, // Catch-all route for unknown paths
+    { path: "*", element: <PageNotFound /> },
+    {
+      path: path.signIn,
+      element: <LoginPage />,
+    },
+    {
+      path: path.signUp,
+      element: <SignUpPage />,
+    }, // Catch-all route for unknown paths
   ]);
 };
 
