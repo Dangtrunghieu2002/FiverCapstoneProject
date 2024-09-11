@@ -25,6 +25,7 @@ const UserManagePage = () => {
       const response = await api.get('/users/phan-trang-tim-kiem', {
         params: { pageIndex: currentPage, pageSize: 10, keyword: searchTerm },
       });
+      
       // Return data in the expected format for ManagementTable
       return {
         items: response.data.content,  // Assuming 'content' contains the list of users
