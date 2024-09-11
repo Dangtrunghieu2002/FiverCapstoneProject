@@ -1,76 +1,44 @@
-// Trang Routes chứa các phần tử để điều hướng
-
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
+import AdminTemplate from "../template/adminTemplate/AdminTemplate";
 import UserTemplate from "../template/userTemplate/UserTemplate";
-import PageNotFound from "../components/PageNotFound/PageNotFound"
-import { path } from "../common/path";
+import PageNotFound from "../components/PageNotFound/PageNotFound";
 import LoginPage from "../pages/LoginPage/LoginPage";
-import ListJobPage from "../pages/ListJobPage/ListJobPage";
-import { Skeleton } from "antd";
 import IndexPage from "../pages/IndexPage/IndexPage";
-// import ListJobType from "../pages/ListJobType/ListJobType";
-import JobDetailPage from "../pages/JobDetailPage/JobDetailPage";
-import SignUpPage from "../pages/SignUpPage/SignUpPage";
-import UserDetailPage from "../pages/UserDetailPage/UserDetailPage";
-import { getLocalStorage } from "../utils/util";
-import ContentDetail from "../components/UserDetailComponent/ContentDetail";
-import UpdateDetail from "../components/UserDetailComponent/UpdateDetail";
-const ListJobType = React.lazy(() => import ('../pages/ListJobType/ListJobType'))
+import JobManagePage from "../pages/JobManagePage/JobManagePage";
+import JobTypeManagePage from "../pages/JobTypeManagePage/JobTypeManagePage";
+import ServiceManagePage from "../pages/ServiceManagePage/ServiceManagePage";
+import UserManagePage from "../pages/UserManagePage/UserManagePage";
+
+// Define lazy-loaded components if needed
+const JobDetailPage = lazy(() => import("../pages/JobDetailPage/JobDetailPage"));
+const UserDetailPage = lazy(() => import("../pages/UserDetailPage/UserDetailPage"));
+
 const useRoutesCustom = () => {
-  const routes = useRoutes([
+  return useRoutes([
     {
-      path: path.homePage,
-      element: <UserTemplate />,
+      path: "/",
+      element: <UserTemplate />, // User layout
       children: [
-        {
-          index : true,
-          element: <IndexPage />
-        },
-        {
-          path: path.listJob,
-          element: <ListJobPage />,
-        },
-        {
-          path: path.jobType,
-          element: <Suspense fallback={<div>Loading...</div>}><ListJobType /></Suspense>
-        },
-        {
-          path:path.jobDetail,
-          element:<JobDetailPage />
-        },
-        {
-          path : path.userDetail,
-          element: getLocalStorage("user") ? <UserDetailPage /> : <PageNotFound />,
-          children: [
-            {
-              index: true,
-              element : <ContentDetail />
-            },
-            {
-              path:path.updateDetail,
-              element: <UpdateDetail />
-            }
-            
-          ]
-        }
+        { index: true, element: <IndexPage /> },
+        { path: "login", element: <LoginPage /> },
+        { path: "user-details", element: <Suspense fallback={<div>Loading...</div>}><UserDetailPage /></Suspense> },
+        { path: "*", element: <PageNotFound /> },
       ],
     },
     {
-      path: path.pageNotFound,
-      element: <PageNotFound />,
+      path: "/admin",
+      element: <AdminTemplate />, // Admin layout
+      children: [
+        { path: "job-management", element: <JobManagePage /> },
+        { path: "job-type-management", element: <JobTypeManagePage /> },
+        { path: "service-management", element: <ServiceManagePage /> },
+        { path: "user-management", element: <UserManagePage /> },
+        { path: "*", element: <PageNotFound /> },
+      ],
     },
-    {
-      path: path.signIn,
-      element: <LoginPage />,
-    },
-    {
-      path: path.signUp,
-      element : <SignUpPage />
-    }
-
+    { path: "*", element: <PageNotFound /> }, // Catch-all route for unknown paths
   ]);
-  return routes;
 };
 
 export default useRoutesCustom;

@@ -1,7 +1,7 @@
 import React from 'react';
-import AdminTopBar from '../../components/AdminTopBar/AdminTopBar';
-import AdminSideBar from '../../components/AdminSideBar/Sidebar';
-import ManagementTable from '../../components/ManagementTable'; // Reusable table component
+import AdminTopBar from '../../components/AdminTopBar/AdminTopBar.jsx';
+import AdminSideBar from '../../components/AdminSideBar/AdminSideBar.jsx';
+import ManagementTable from '../../components/ManagementTable/ManagementTable.jsx'; // Reusable table component
 import api from '../../service/api';
 
 const UserManagePage = () => {
@@ -21,24 +21,29 @@ const UserManagePage = () => {
 
   // Fetch user data function
   const fetchUsers = async (currentPage, searchTerm) => {
-    const response = await api.get('/users/phan-trang-tim-kiem', {
-      params: { pageIndex: currentPage, pageSize: 10, keyword: searchTerm },
-    });
-    return response.data;
+    try {
+      const response = await api.get('/users/phan-trang-tim-kiem', {
+        params: { pageIndex: currentPage, pageSize: 10, keyword: searchTerm },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Failed to fetch users:', error);
+      return [];
+    }
   };
 
   return (
-    <div className="admin-page">
+    <div className="h-screen flex flex-col">
       {/* Top Bar */}
       <AdminTopBar />
 
-      <div className="admin-content" style={{ display: 'flex' }}>
+      <div className="flex flex-1">
         {/* Sidebar */}
         <AdminSideBar />
 
         {/* Main content */}
-        <div className="content" style={{ flex: 1, padding: '20px' }}>
-          <h2>Quản lý người dùng</h2>
+        <div className="flex-1 p-6 overflow-y-auto">
+          <h2 className="text-2xl font-semibold mb-4">Quản lý người dùng</h2>
           <ManagementTable columnMapping={columnMapping} fetchData={fetchUsers} />
         </div>
       </div>
