@@ -25,7 +25,11 @@ const UserManagePage = () => {
       const response = await api.get('/users/phan-trang-tim-kiem', {
         params: { pageIndex: currentPage, pageSize: 10, keyword: searchTerm },
       });
-      return response.data;
+      // Return data in the expected format for ManagementTable
+      return {
+        items: response.data.content,  // Assuming 'content' contains the list of users
+        totalPages: response.data.totalPages // Adjust based on API response
+      };
     } catch (error) {
       console.error('Failed to fetch users:', error);
       return [];

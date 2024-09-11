@@ -3,39 +3,101 @@ import AdminTopBar from '../../components/AdminTopBar/AdminTopBar.jsx';
 import AdminSideBar from '../../components/AdminSideBar/AdminSideBar.jsx';
 import ManagementTable from '../../components/ManagementTable/ManagementTable.jsx';
 import AdminModal from '../../components/AdminModal/AdminModal.jsx';
-import AdminForm from '../../components/AdminForm/AdminForm.jsx';
+import AdminForm from '../../components/AdminForm/AdminForm.jsx'; // Assuming you have an AdminForm for the modal
+import api from '../../service/api'; // Importing the configured axios instance
 
 const JobManagementPage = () => {
     const [showModal, setShowModal] = useState(false);
     const [selectedJob, setSelectedJob] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
-    const jobList = [
-        { id: 1, title: "Software Engineer", company: "Tech Corp", status: "Active" },
-        { id: 2, title: "Product Manager", company: "Innovate Inc.", status: "Inactive" },
-    ];
+    // Column mapping for job management
+    const columnMapping = {
+        id: 'Job ID',
+        tenCongViec: 'Job Title',
+        moTa: 'Description',
+        giaTien: 'Price',
+        nguoiTao: 'Creator ID',
+        saoCongViec: 'Rating',
+        danhGia: 'Reviews',
+    };
 
-    const jobFields = [
-        { name: 'title', label: 'Job Title', type: 'text', placeholder: 'Enter job title' },
-        { name: 'company', label: 'Company Name', type: 'text', placeholder: 'Enter company name' },
-        { name: 'status', label: 'Job Status', type: 'text', placeholder: 'Enter job status' },
-    ];
+    // Fetch job data function
+    const fetchJobs = async (currentPage, searchTerm) => {
+        try {
+            const response = await api.get('/cong-viec/phan-trang-tim-kiem', {
+                params: { pageIndex: currentPage, pageSize: 10, keyword: searchTerm },
+            });
+            setTotalPages(response.data.totalPages);
+            return {
+                items: response.data.content, // Adjust based on actual API response structure
+                totalPages: response.data.totalPages,
+            };
+        } catch (error) {
+            console.error('Failed to fetch jobs:', error);
+            return { items: [], totalPages: 1 };
+        }
+    };
+
+    // Add a new job
+    const addJob = async (jobData) => {
+        try {
+            const response = await api.post('/cong-viec', jobData);
+            console.log('Job added successfully:', response.data);
+            // Optionally refetch the jobs
+            fetchJobs(currentPage, "");
+        } catch (error) {
+            console.error('Failed to add job:', error);
+        }
+    };
+
+    // Edit an existing job
+    const editJob = async (jobId, jobData) => {
+        try {
+            const response = await api.put(`/cong-viec/${jobId}`, jobData);
+            console.log('Job updated successfully:', response.data);
+            // Optionally refetch the jobs
+            fetchJobs(currentPage, "");
+        } catch (error) {
+            console.error('Failed to update job:', error);
+        }
+    };
+
+    // Delete a job
+    const deleteJob = async (jobId) => {
+        try {
+            await api.delete(`/cong-viec/${jobId}`);
+            console.log('Job deleted successfully');
+            // Optionally refetch the jobs
+            fetchJobs(currentPage, "");
+        } catch (error) {
+            console.error('Failed to delete job:', error);
+        }
+    };
 
     const handleAddJob = () => {
-        setSelectedJob(null);
+        setSelectedJob(null);  // Clear the selected job to create a new one
         setShowModal(true);
     };
 
     const handleEditJob = (job) => {
-        setSelectedJob(job);
+        setSelectedJob(job);  // Set the selected job to edit
         setShowModal(true);
     };
 
     const handleDeleteJob = (jobId) => {
-        console.log('Deleted Job:', jobId);
+        deleteJob(jobId);
     };
 
-    const handleFormSubmit = (formData) => {
-        console.log('Form Data Submitted:', formData);
+    const handleFormSubmit = (jobData) => {
+        if (selectedJob) {
+            // Edit job
+            editJob(selectedJob.id, jobData);
+        } else {
+            // Add new job
+            addJob(jobData);
+        }
         setShowModal(false);
     };
 
@@ -44,7 +106,7 @@ const JobManagementPage = () => {
             <AdminTopBar />
             <div className="flex flex-1">
                 <AdminSideBar />
-                <div className="flex-1 p-6 overflow-y-auto bg-gray-100">
+                <div className="flex-1 p-6 overflow-y-auto">
                     <h1 className="text-2xl font-semibold mb-4">Job Management</h1>
                     <button 
                         onClick={handleAddJob} 
@@ -53,13 +115,17 @@ const JobManagementPage = () => {
                         Add Job
                     </button>
                     <ManagementTable 
-                        data={jobList} 
-                        onEdit={handleEditJob} 
-                        onDelete={handleDeleteJob} 
+                        columnMapping={columnMapping}
+                        fetchData={fetchJobs}
+                        onEdit={handleEditJob}
+                        onDelete={handleDeleteJob}  // Handle job deletion
                     />
                     {showModal && (
                         <AdminModal isOpen={showModal} onClose={() => setShowModal(false)}>
-                            <Form data={selectedJob} fields={jobFields} onSubmit={handleFormSubmit} />
+                            <AdminForm
+                                data={selectedJob}
+                                onSubmit={handleFormSubmit}  // Submit form data to add/edit job
+                            />
                         </AdminModal>
                     )}
                 </div>

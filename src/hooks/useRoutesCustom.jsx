@@ -67,10 +67,13 @@ const useRoutesCustom = () => {
       path: "/admin",
       element: <AdminTemplate />, // Admin layout
       children: [
+        {
+          index: true, // This makes UserManagePage the default when entering "/admin"
+          element: <UserManagePage />,
+        },
         { path: "job-management", element: <JobManagePage /> },
         { path: "job-type-management", element: <JobTypeManagePage /> },
         { path: "service-management", element: <ServiceManagePage /> },
-        { path: "user-management", element: <UserManagePage /> },
         { path: "*", element: <PageNotFound /> },
       ],
     },
