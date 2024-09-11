@@ -61,6 +61,7 @@ const useRoutesCustom = () => {
             },
           ],
         },
+        { path: "*", element: <PageNotFound /> },
       ],
     },
     {
@@ -77,7 +78,6 @@ const useRoutesCustom = () => {
         { path: "*", element: <PageNotFound /> },
       ],
     },
-    { path: "*", element: <PageNotFound /> },
     {
       path: path.signIn,
       element: <LoginPage />,
