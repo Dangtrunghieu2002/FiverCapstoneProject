@@ -21,7 +21,7 @@ const JobTypeManagementPage = () => {
     // Fetch job type data function
     const fetchJobTypes = async (currentPage, searchTerm) => {
         try {
-            const response = await api.get('/loai-cong-viec/phan-trang-tim-kiem', {
+            const response = await api.get('/loai-cong-viec', {
                 params: { pageIndex: currentPage, pageSize: 10, keyword: searchTerm },
             });
             setTotalPages(response.data.totalPages);

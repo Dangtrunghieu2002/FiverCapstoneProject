@@ -70,7 +70,7 @@ const useRoutesCustom = () => {
       children: [
         {
           index: true, // This makes UserManagePage the default when entering "/admin"
-          element: <UserManagePage />,
+          path: "user-management", element: <UserManagePage />,
         },
         { path: "job-management", element: <JobManagePage /> },
         { path: "job-type-management", element: <JobTypeManagePage /> },

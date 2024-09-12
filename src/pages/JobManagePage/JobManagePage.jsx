@@ -26,13 +26,14 @@ const JobManagementPage = () => {
     // Fetch job data function
     const fetchJobs = async (currentPage, searchTerm) => {
         try {
-            const response = await api.get('/cong-viec/phan-trang-tim-kiem', {
+            const response = await api.get('/cong-viec', {
                 params: { pageIndex: currentPage, pageSize: 10, keyword: searchTerm },
             });
-            setTotalPages(response.data.totalPages);
+
+            // Safeguard: Ensure that response.data.content is always an array
             return {
-                items: response.data.content, // Adjust based on actual API response structure
-                totalPages: response.data.totalPages,
+            items: Array.isArray(response.data.content) ? response.data.content : [],
+            totalPages: response.data.totalPages || 1,
             };
         } catch (error) {
             console.error('Failed to fetch jobs:', error);

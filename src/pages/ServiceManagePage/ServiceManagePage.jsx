@@ -24,7 +24,7 @@ const ServiceManagementPage = () => {
     // Fetch service data
     const fetchServices = async (page = 1, keyword = "") => {
         try {
-            const response = await api.get('/thue-cong-viec/phan-trang-tim-kiem', {
+            const response = await api.get('/thue-cong-viec', {
                 params: { 
                     pageIndex: page, 
                     pageSize: 10, 

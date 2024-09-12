@@ -22,7 +22,7 @@ const UserManagePage = () => {
   // Fetch user data function
   const fetchUsers = async (currentPage, searchTerm) => {
     try {
-      const response = await api.get('/users/phan-trang-tim-kiem', {
+      const response = await api.get('/users', {
         params: { pageIndex: currentPage, pageSize: 10, keyword: searchTerm },
       });
       
